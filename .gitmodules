@@ -1,0 +1,3 @@
+[submodule "Assets/Application/Utils"]
+	path = Assets/Application/Utils
+	url = git@github.com:DudekKonrad/Utils.git
