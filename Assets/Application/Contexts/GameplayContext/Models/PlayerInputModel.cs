@@ -6,6 +6,7 @@ namespace Application.Contexts.GameplayContext.Models
     {
         public Vector2 Mouse;
         public Vector2 Point;
+        public Vector2 Movement;
         public bool RightClick;
         public bool MiddleClick;
         public float Scroll;

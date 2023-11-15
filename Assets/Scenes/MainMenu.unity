@@ -675,7 +675,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: 569168456}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -6655,9 +6656,9 @@ SceneRoots:
   - {fileID: 161911821}
   - {fileID: 1601640634}
   - {fileID: 1773146553}
-  - {fileID: 569168455}
   - {fileID: 1215766499}
   - {fileID: 18388375}
   - {fileID: 435369167}
   - {fileID: 1801549295}
   - {fileID: 469242491}
+  - {fileID: 569168455}
