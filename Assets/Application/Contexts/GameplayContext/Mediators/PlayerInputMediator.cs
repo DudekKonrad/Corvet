@@ -22,7 +22,6 @@ namespace Application.Contexts.GameplayContext.Mediators
         {
             var inputValue = value.Get<Vector2>();
             _playerInputModel.Movement = inputValue;
-            Debug.Log($"On movement value = {_playerInputModel.Movement}");
         }
     }
 }
