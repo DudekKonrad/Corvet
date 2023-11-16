@@ -6267,14 +6267,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3786382094319250017, guid: e4c27c0c84e5f89419be3fffc7203d0e, type: 3}
-      propertyPath: m_fontStyle
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3786382094319250017, guid: e4c27c0c84e5f89419be3fffc7203d0e, type: 3}
-      propertyPath: m_enableVertexGradient
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3813463371437433348, guid: e4c27c0c84e5f89419be3fffc7203d0e, type: 3}
       propertyPath: m_Name
       value: PlayButton
@@ -6283,8 +6275,7 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1795724690}
-    m_RemovedComponents:
-    - {fileID: 6220826988243469572, guid: e4c27c0c84e5f89419be3fffc7203d0e, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
