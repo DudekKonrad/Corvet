@@ -9,6 +9,7 @@ namespace Application.Contexts.GameplayContext.Models
         public Vector2 Movement;
         public bool RightClick;
         public bool MiddleClick;
+        public bool SpaceClick;
         public float Scroll;
     }
 }

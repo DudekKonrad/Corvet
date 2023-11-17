@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df0798e119a148768230188a355ae55d, type: 3}
   m_Name: CorvetGameConfig
   m_EditorClassIdentifier: 
-  _damping: 0
-  _name: 
+  _panelDuration: 0.4
+  _damping: 0.2
+  _name: Kolomek
   _speed: 7
   _distanceThreshold: 0.1
