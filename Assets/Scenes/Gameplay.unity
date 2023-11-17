@@ -874,7 +874,7 @@ GameObject:
   - component: {fileID: 915603229}
   - component: {fileID: 915603231}
   - component: {fileID: 915603233}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1448,7 +1448,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1109276435}
   - component: {fileID: 1109276436}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1661,7 +1661,7 @@ GameObject:
   - component: {fileID: 1866570468}
   - component: {fileID: 1866570469}
   - component: {fileID: 1866570470}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CoinMagnet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1717,7 +1717,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 8
 --- !u!114 &1866570470
 MonoBehaviour:
   m_ObjectHideFlags: 0
