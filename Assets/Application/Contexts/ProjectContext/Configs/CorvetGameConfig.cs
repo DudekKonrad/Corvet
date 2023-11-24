@@ -14,10 +14,15 @@ namespace Application.Contexts.ProjectContext.Configs
         [SerializeField] private int _speed;
         
         [Header("Collectables")] [SerializeField] private float _distanceThreshold;
+        
+        [Header("Enemies")] [SerializeField] private float _enemySpeed;
+        [SerializeField] private float _enemyStoppingDistance;
 
         public float PanelDuration => _panelDuration;
         public string Name => _name;
         public int Speed => _speed;
         public float DistanceThreshold => _distanceThreshold;
+        public float EnemySpeed => _enemySpeed;
+        public float EnemyStoppingDistance => _enemyStoppingDistance;
     }
 }

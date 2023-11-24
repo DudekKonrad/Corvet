@@ -17,3 +17,5 @@ MonoBehaviour:
   _name: Kolomek
   _speed: 7
   _distanceThreshold: 0.1
+  _enemySpeed: 1
+  _enemyStoppingDistance: 0.2

@@ -11,7 +11,8 @@ Material:
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - BEVEL_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -46,11 +47,11 @@ Material:
     m_Ints: []
     m_Floats:
     - _Ambient: 0.581
-    - _Bevel: 0.531
+    - _Bevel: 0.668
     - _BevelClamp: 0
-    - _BevelOffset: 0
+    - _BevelOffset: 0.112
     - _BevelRoundness: 0
-    - _BevelWidth: 0
+    - _BevelWidth: 0.368
     - _BumpFace: 0.143
     - _BumpOutline: 0.168
     - _ColorMask: 15
@@ -75,7 +76,7 @@ Material:
     - _Reflectivity: 10.71
     - _ScaleRatioA: 0.8333333
     - _ScaleRatioB: 0.6770833
-    - _ScaleRatioC: 0.6770833
+    - _ScaleRatioC: 0.34248018
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
@@ -88,10 +89,10 @@ Material:
     - _StencilWriteMask: 255
     - _TextureHeight: 512
     - _TextureWidth: 512
-    - _UnderlayDilate: 0
-    - _UnderlayOffsetX: 0.13
-    - _UnderlayOffsetY: 0
-    - _UnderlaySoftness: 0
+    - _UnderlayDilate: 0.48
+    - _UnderlayOffsetX: 0.6
+    - _UnderlayOffsetY: 0.93
+    - _UnderlaySoftness: 0.567
     - _VertexOffsetX: 0
     - _VertexOffsetY: 0
     - _WeightBold: 0.75

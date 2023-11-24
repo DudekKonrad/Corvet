@@ -1,5 +1,4 @@
-﻿using System;
-using Application.Contexts.GameplayContext.Mediators;
+﻿using Application.Contexts.GameplayContext.Mediators;
 using Application.Contexts.GameplayContext.Models;
 using Application.Contexts.ProjectContext.Configs;
 using UnityEngine;
@@ -58,6 +57,24 @@ namespace Application.Contexts.GameplayContext
         {
             var projectile = _pool.Get();
             projectile.Init(Vector3.one, _pool);
+        }
+        
+        private Transform GetClosestEnemy (Transform[] enemies)
+        {
+            Transform bestTarget = null;
+            var closestDistanceSqr = Mathf.Infinity;
+            var currentPosition = transform.position;
+            foreach( var potentialTarget in enemies)
+            {
+                var directionToTarget = potentialTarget.position - currentPosition;
+                var dSqrToTarget = directionToTarget.sqrMagnitude;
+                if(dSqrToTarget < closestDistanceSqr)
+                {
+                    closestDistanceSqr = dSqrToTarget;
+                    bestTarget = potentialTarget;
+                }
+            }
+            return bestTarget;
         }
     }
 }
