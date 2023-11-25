@@ -1,4 +1,5 @@
-﻿using Application.Contexts.GameplayContext.Models;
+﻿using System;
+using Application.Contexts.GameplayContext.Models;
 using Application.Contexts.ProjectContext.Configs;
 using UnityEngine;
 using Zenject;
@@ -22,9 +23,10 @@ namespace Application.Contexts.GameplayContext.Mediators
             _collider = GetComponent<CircleCollider2D>();
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter2D(Collider2D col)
         {
-            if (collision.gameObject.GetComponent<PlayerController>())
+            Debug.Log($"Coin trigger!");
+            if (col.gameObject.GetComponent<PlayerController>())
             { 
                 _scoreModel.AddScore(_value);
                 gameObject.SetActive(false);
