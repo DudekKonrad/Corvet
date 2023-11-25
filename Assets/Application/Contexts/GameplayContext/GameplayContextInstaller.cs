@@ -11,6 +11,7 @@ namespace Application.Contexts.GameplayContext
         {
             Container.BindInterfacesAndSelfTo<PlayerInputModel>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerModel>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<EnemyModel>().AsTransient().NonLazy();
             Container.BindInstance(_playerController).WithId(nameof(_playerController)).AsCached().NonLazy();
             Container.Bind<ScoreModel>().AsSingle().NonLazy();
         }

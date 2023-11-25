@@ -1,4 +1,6 @@
-﻿using Application.Contexts.ProjectContext.Configs;
+﻿using System.Linq;
+using Application.Contexts.ProjectContext.Configs;
+using Resources.Configs;
 using UnityEngine;
 using UnityEngine.Pool;
 using Zenject;
@@ -8,11 +10,14 @@ namespace Application.Contexts.GameplayContext.Mediators
     public class ProjectileView : MonoBehaviour
     {
         [Inject] private readonly CorvetGameConfig _gameConfig;
+
+        [SerializeField] private ProjectileType _projectileType;
         
         private Rigidbody2D _rigidbody;
         private ObjectPool<ProjectileView> _pool;
         private Vector3 _direction;
-
+        private ProjectileConfig _projectileConfig;
+        
         public void Init(ObjectPool<ProjectileView> pool, Vector3 direction)
         {
             _pool = pool;
@@ -24,11 +29,12 @@ namespace Application.Contexts.GameplayContext.Mediators
         private void Start()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
+            _projectileConfig = _gameConfig.Projectiles.First(_ => _.Type == _projectileType);
         }
 
         private void FixedUpdate()
         {
-            _rigidbody.velocity = _direction * _gameConfig.ProjectileSpeed;
+            _rigidbody.velocity = _direction * _projectileConfig.ProjectileSpeed;
         }
 
         private void OnCollisionEnter2D(Collision2D col)
@@ -37,6 +43,7 @@ namespace Application.Contexts.GameplayContext.Mediators
             if (enemy != null)
             {
                 Debug.Log($"Projectile hit enemy!");
+                enemy.TakeDamage(_projectileConfig.Damage);
                 Destroy();
             }
         }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Resources.Configs;
+using UnityEngine;
 
 namespace Application.Contexts.ProjectContext.Configs
 {
@@ -18,7 +19,7 @@ namespace Application.Contexts.ProjectContext.Configs
         [Header("Enemies")] [SerializeField] private float _enemySpeed;
         [SerializeField] private float _enemyStoppingDistance;
         
-        [Header("Projectiles")] [SerializeField] private float _projectileSpeed;
+        [Header("Projectiles")] [SerializeField] private ProjectileConfig[] _projectiles;
 
 
         public float PanelDuration => _panelDuration;
@@ -27,6 +28,6 @@ namespace Application.Contexts.ProjectContext.Configs
         public float DistanceThreshold => _distanceThreshold;
         public float EnemySpeed => _enemySpeed;
         public float EnemyStoppingDistance => _enemyStoppingDistance;
-        public float ProjectileSpeed => _projectileSpeed;
+        public ProjectileConfig[] Projectiles => _projectiles;
     }
 }
