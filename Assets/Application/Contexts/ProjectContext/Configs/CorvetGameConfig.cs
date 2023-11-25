@@ -18,7 +18,9 @@ namespace Application.Contexts.ProjectContext.Configs
         
         [Header("Enemies")] [SerializeField] private float _enemySpeed;
         [SerializeField] private float _enemyStoppingDistance;
-        
+        [SerializeField] private float _enemySpawnCooldown;
+        [SerializeField] private int _enemyMaxHp;
+
         [Header("Projectiles")] [SerializeField] private ProjectileConfig[] _projectiles;
 
 
@@ -29,5 +31,7 @@ namespace Application.Contexts.ProjectContext.Configs
         public float EnemySpeed => _enemySpeed;
         public float EnemyStoppingDistance => _enemyStoppingDistance;
         public ProjectileConfig[] Projectiles => _projectiles;
+        public float EnemySpawnCooldown => _enemySpawnCooldown;
+        public int EnemyMaxHp => _enemyMaxHp;
     }
 }

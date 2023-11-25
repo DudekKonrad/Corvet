@@ -1,6 +1,7 @@
 using Application.Contexts.ProjectContext.Configs;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.UI;
 using Zenject;
 
@@ -18,11 +19,22 @@ namespace Application.Contexts.GameplayContext
         private Rigidbody2D _rigidbody;
         private Color _startingColor;
 
+        public bool IsActiveInPool;
+        private ObjectPool<EnemyController> _pool;
+
         private void Start()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _enemyModel.CurrentHealthPoints = _enemyModel.MaxHealthPoints;
             _startingColor = _healthBar.color;
+        }
+
+        public void Init(ObjectPool<EnemyController> pool)
+        {
+            _pool = pool;
+            _enemyModel.CurrentHealthPoints = _gameConfig.EnemyMaxHp;
+            var fill = (float)_enemyModel.CurrentHealthPoints / _enemyModel.MaxHealthPoints;
+            _healthBar.fillAmount = fill;
         }
 
         private void FixedUpdate()
@@ -46,6 +58,15 @@ namespace Application.Contexts.GameplayContext
                 _healthBar.DOColor(_startingColor, _duration);
             });
             _healthBar.transform.DOScale(Vector3.one*1.1f,_duration).SetLoops(2, LoopType.Yoyo);
+            if (_enemyModel.CurrentHealthPoints <= 0)
+            {
+                Die();
+            }
+        }
+
+        private void Die()
+        {
+            _pool.Release(this);
         }
     }
 }

@@ -1,5 +1,8 @@
-﻿using Application.Contexts.GameplayContext.Mediators;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Application.Contexts.GameplayContext.Mediators;
 using Application.Contexts.GameplayContext.Models;
+using Application.Contexts.GameplayContext.Services;
 using Application.Contexts.ProjectContext.Configs;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -18,8 +21,7 @@ namespace Application.Contexts.GameplayContext
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private float _fireRate;
         [SerializeField] private ProjectileView _projectilePrefab;
-        [SerializeField] private Transform[] _enemies;
-        [SerializeField] private ProjectileView[] _projectilesContainer;
+        [SerializeField] private EnemySpawnerService _enemySpawnerService;
 
         private ObjectPool<ProjectileView> _pool;
 
@@ -27,7 +29,7 @@ namespace Application.Contexts.GameplayContext
 
         private void Awake()
         {
-            _pool = new ObjectPool<ProjectileView>(CreateProjectile,OnGetProjectile, OnPutBackInPool, 
+            _pool = new ObjectPool<ProjectileView>(OnCreateProjectile,OnGetProjectile, OnReleaseProjectile, 
                 defaultCapacity: 200);
         }
 
@@ -36,12 +38,12 @@ namespace Application.Contexts.GameplayContext
             obj.transform.position = transform.position;
         }
 
-        private void OnPutBackInPool(ProjectileView obj)
+        private void OnReleaseProjectile(ProjectileView obj)
         {
             obj.gameObject.SetActive(false);
         }
 
-        private ProjectileView CreateProjectile()
+        private ProjectileView OnCreateProjectile()
         {
             var projectile = _diContainer.InstantiatePrefabForComponent<ProjectileView>(_projectilePrefab, transform);
             return projectile;
@@ -64,12 +66,20 @@ namespace Application.Contexts.GameplayContext
         }
         private void Shoot()
         {
-            var projectile = _pool.Get();
-            var directionToEnemy = GetClosestEnemy(_enemies).position - transform.position;
-            projectile.Init(_pool, directionToEnemy);
+            var enemy = GetClosestEnemy(_enemySpawnerService.Enemies.Where(_ => _.IsActiveInPool).Select(_ => _.transform));
+            if (enemy != null)
+            {
+                var projectile = _pool.Get();
+                var directionToEnemy = enemy.position - transform.position;
+                projectile.Init(_pool, directionToEnemy);
+            }
+            else
+            {
+                Debug.Log($"There is no enemy to choose!");
+            }
         }
         
-        private Transform GetClosestEnemy (Transform[] enemies)
+        private Transform GetClosestEnemy (IEnumerable<Transform> enemies)
         {
             Transform bestTarget = null;
             var closestDistanceSqr = Mathf.Infinity;

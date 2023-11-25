@@ -25,7 +25,6 @@ namespace Application.Contexts.GameplayContext.Mediators
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            Debug.Log($"Coin trigger!");
             if (col.gameObject.GetComponent<PlayerController>())
             { 
                 _scoreModel.AddScore(_value);

@@ -17,9 +17,11 @@ MonoBehaviour:
   _name: Kolomek
   _speed: 7
   _distanceThreshold: 0.1
-  _enemySpeed: 1
+  _enemySpeed: 1.5
   _enemyStoppingDistance: 0
+  _enemySpawnCooldown: 3
+  _enemyMaxHp: 40
   _projectiles:
   - _type: 0
-    _projectileSpeed: 1
-    _damage: 5
+    _projectileSpeed: 1.4
+    _damage: 10

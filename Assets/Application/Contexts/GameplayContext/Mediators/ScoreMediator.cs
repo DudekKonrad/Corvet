@@ -22,7 +22,6 @@ namespace Application.Contexts.GameplayContext.Mediators
         private void OnScoreChangedSignal()
         {
             _text.text = $"{_scoreModel.Score}";
-            Debug.Log($"Score changed {_scoreModel.Score}");
         }
     }
 }
