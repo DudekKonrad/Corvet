@@ -10,6 +10,7 @@ namespace Application.Contexts.GameplayContext
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerController : MonoBehaviour
     {
+        [Inject] private readonly DiContainer _diContainer;
         [Inject] private readonly CorvetGameConfig _gameConfig;
         [Inject] private readonly PlayerInputModel _playerInput;
         [Inject] private readonly PlayerModel _playerModel;
@@ -17,6 +18,8 @@ namespace Application.Contexts.GameplayContext
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private float _fireRate;
         [SerializeField] private ProjectileView _projectilePrefab;
+        [SerializeField] private Transform[] _enemies;
+        [SerializeField] private ProjectileView[] _projectilesContainer;
 
         private ObjectPool<ProjectileView> _pool;
 
@@ -24,8 +27,13 @@ namespace Application.Contexts.GameplayContext
 
         private void Awake()
         {
-            _pool = new ObjectPool<ProjectileView>(CreateProjectile,null, OnPutBackInPool, 
+            _pool = new ObjectPool<ProjectileView>(CreateProjectile,OnGetProjectile, OnPutBackInPool, 
                 defaultCapacity: 200);
+        }
+
+        private void OnGetProjectile(ProjectileView obj)
+        {
+            obj.transform.position = transform.position;
         }
 
         private void OnPutBackInPool(ProjectileView obj)
@@ -35,7 +43,7 @@ namespace Application.Contexts.GameplayContext
 
         private ProjectileView CreateProjectile()
         {
-            var projectile = Instantiate(_projectilePrefab, transform.position, Quaternion.identity);
+            var projectile = _diContainer.InstantiatePrefabForComponent<ProjectileView>(_projectilePrefab, transform);
             return projectile;
         }
 
@@ -51,12 +59,14 @@ namespace Application.Contexts.GameplayContext
             if (_timer >= 1f/_fireRate)
             {
                 _timer = 0;
+                Shoot();
             }
         }
         private void Shoot()
         {
             var projectile = _pool.Get();
-            projectile.Init(Vector3.one, _pool);
+            var directionToEnemy = GetClosestEnemy(_enemies).position - transform.position;
+            projectile.Init(_pool, directionToEnemy);
         }
         
         private Transform GetClosestEnemy (Transform[] enemies)

@@ -1,25 +1,26 @@
-﻿using System;
-using System.Numerics;
+﻿using Application.Contexts.ProjectContext.Configs;
 using UnityEngine;
 using UnityEngine.Pool;
-using Vector3 = UnityEngine.Vector3;
+using Zenject;
 
 namespace Application.Contexts.GameplayContext.Mediators
 {
     public class ProjectileView : MonoBehaviour
     {
-        [SerializeField] private float _speed;
+        [Inject] private readonly CorvetGameConfig _gameConfig;
+        
         private Rigidbody2D _rigidbody;
         private ObjectPool<ProjectileView> _pool;
+        private Vector3 _direction;
 
-        public void Init(Vector3 direction, ObjectPool<ProjectileView> pool)
+        public void Init(ObjectPool<ProjectileView> pool, Vector3 direction)
         {
-            transform.forward = direction;
             _pool = pool;
+            _direction = direction;
             gameObject.SetActive(true);
         }
 
-        private void Destroy() => _pool.Release(this);
+        public void Destroy() => _pool.Release(this);
         private void Start()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
@@ -27,7 +28,17 @@ namespace Application.Contexts.GameplayContext.Mediators
 
         private void FixedUpdate()
         {
-            _rigidbody.velocity = transform.forward * _speed;
+            _rigidbody.velocity = _direction * _gameConfig.ProjectileSpeed;
+        }
+
+        private void OnCollisionEnter2D(Collision2D col)
+        {
+            var enemy = col.gameObject.GetComponent<EnemyController>();
+            if (enemy != null)
+            {
+                Debug.Log($"Projectile hit enemy!");
+                Destroy();
+            }
         }
     }
 }

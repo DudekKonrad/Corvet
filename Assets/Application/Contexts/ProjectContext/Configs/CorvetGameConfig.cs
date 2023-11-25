@@ -17,6 +17,9 @@ namespace Application.Contexts.ProjectContext.Configs
         
         [Header("Enemies")] [SerializeField] private float _enemySpeed;
         [SerializeField] private float _enemyStoppingDistance;
+        
+        [Header("Projectiles")] [SerializeField] private float _projectileSpeed;
+
 
         public float PanelDuration => _panelDuration;
         public string Name => _name;
@@ -24,5 +27,6 @@ namespace Application.Contexts.ProjectContext.Configs
         public float DistanceThreshold => _distanceThreshold;
         public float EnemySpeed => _enemySpeed;
         public float EnemyStoppingDistance => _enemyStoppingDistance;
+        public float ProjectileSpeed => _projectileSpeed;
     }
 }

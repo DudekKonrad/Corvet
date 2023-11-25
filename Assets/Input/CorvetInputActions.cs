@@ -125,6 +125,15 @@ public partial class @CorvetInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""76784648-3172-45ac-995e-544a97ad0c67"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -655,6 +664,17 @@ public partial class @CorvetInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""SpaceClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""51222d3c-8261-4407-8f82-fd05edac864e"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1170,6 +1190,7 @@ public partial class @CorvetInputActions: IInputActionCollection2, IDisposable
         m_Player_Mouse = m_Player.FindAction("Mouse", throwIfNotFound: true);
         m_Player_Navigate = m_Player.FindAction("Navigate", throwIfNotFound: true);
         m_Player_SpaceClick = m_Player.FindAction("SpaceClick", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1253,6 +1274,7 @@ public partial class @CorvetInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Mouse;
     private readonly InputAction m_Player_Navigate;
     private readonly InputAction m_Player_SpaceClick;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @CorvetInputActions m_Wrapper;
@@ -1268,6 +1290,7 @@ public partial class @CorvetInputActions: IInputActionCollection2, IDisposable
         public InputAction @Mouse => m_Wrapper.m_Player_Mouse;
         public InputAction @Navigate => m_Wrapper.m_Player_Navigate;
         public InputAction @SpaceClick => m_Wrapper.m_Player_SpaceClick;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1310,6 +1333,9 @@ public partial class @CorvetInputActions: IInputActionCollection2, IDisposable
             @SpaceClick.started += instance.OnSpaceClick;
             @SpaceClick.performed += instance.OnSpaceClick;
             @SpaceClick.canceled += instance.OnSpaceClick;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1347,6 +1373,9 @@ public partial class @CorvetInputActions: IInputActionCollection2, IDisposable
             @SpaceClick.started -= instance.OnSpaceClick;
             @SpaceClick.performed -= instance.OnSpaceClick;
             @SpaceClick.canceled -= instance.OnSpaceClick;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1487,6 +1516,7 @@ public partial class @CorvetInputActions: IInputActionCollection2, IDisposable
         void OnMouse(InputAction.CallbackContext context);
         void OnNavigate(InputAction.CallbackContext context);
         void OnSpaceClick(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
