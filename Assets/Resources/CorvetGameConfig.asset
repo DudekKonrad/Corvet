@@ -23,5 +23,5 @@ MonoBehaviour:
   _enemyMaxHp: 40
   _projectiles:
   - _type: 0
-    _projectileSpeed: 1.4
+    _projectileSpeed: 4
     _damage: 10

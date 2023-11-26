@@ -22,6 +22,7 @@ namespace Application.Contexts.GameplayContext.Mediators
         {
             _pool = pool;
             _direction = direction;
+            _direction.Normalize();
             gameObject.SetActive(true);
         }
 
@@ -43,8 +44,8 @@ namespace Application.Contexts.GameplayContext.Mediators
             if (enemy != null)
             {
                 enemy.TakeDamage(_projectileConfig.Damage);
-                Destroy();
             }
+            Destroy();
         }
     }
 }
