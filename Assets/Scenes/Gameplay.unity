@@ -542,7 +542,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 6991330370103995809, guid: a668febb3da88e845af2b8162f86345c, type: 3}
       propertyPath: _fireRate
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6991330370103995809, guid: a668febb3da88e845af2b8162f86345c, type: 3}
       propertyPath: _enemies.Array.size

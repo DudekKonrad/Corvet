@@ -42,7 +42,6 @@ namespace Application.Contexts.GameplayContext.Mediators
             var enemy = col.gameObject.GetComponent<EnemyController>();
             if (enemy != null)
             {
-                Debug.Log($"Projectile hit enemy!");
                 enemy.TakeDamage(_projectileConfig.Damage);
                 Destroy();
             }

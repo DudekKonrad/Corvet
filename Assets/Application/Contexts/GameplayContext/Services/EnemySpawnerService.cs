@@ -41,7 +41,6 @@ namespace Application.Contexts.GameplayContext.Services
             Timer.ProcessTime(ref _spawnCooldown, Time.deltaTime);
             if (_spawnCooldown <= 0)
             {
-                Debug.Log($"Will spawn enemy");
                 var enemy = _enemiesPool.Get();
                 enemy.Init(_enemiesPool);
                 _spawnCooldown = _gameConfig.EnemySpawnCooldown;

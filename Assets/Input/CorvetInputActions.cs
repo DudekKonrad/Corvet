@@ -1175,7 +1175,24 @@ public partial class @CorvetInputActions: IInputActionCollection2, IDisposable
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Keyboard&Mouse"",
+            ""bindingGroup"": ""Keyboard&Mouse"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
@@ -1503,6 +1520,15 @@ public partial class @CorvetInputActions: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+    private int m_KeyboardMouseSchemeIndex = -1;
+    public InputControlScheme KeyboardMouseScheme
+    {
+        get
+        {
+            if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard&Mouse");
+            return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
+        }
+    }
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);

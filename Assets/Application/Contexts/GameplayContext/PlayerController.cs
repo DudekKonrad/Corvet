@@ -73,10 +73,6 @@ namespace Application.Contexts.GameplayContext
                 var directionToEnemy = enemy.position - transform.position;
                 projectile.Init(_pool, directionToEnemy);
             }
-            else
-            {
-                Debug.Log($"There is no enemy to choose!");
-            }
         }
         
         private Transform GetClosestEnemy (IEnumerable<Transform> enemies)

@@ -15,6 +15,7 @@ namespace Application.Contexts.GameplayContext
 
         [SerializeField] private Image _healthBar;
         [SerializeField] private float _duration;
+        [SerializeField] private ParticleSystem _particleSystem;
     
         private Rigidbody2D _rigidbody;
         private Color _startingColor;
@@ -52,6 +53,7 @@ namespace Application.Contexts.GameplayContext
         {
             _enemyModel.CurrentHealthPoints -= damage;
             var fill = (float)_enemyModel.CurrentHealthPoints / _enemyModel.MaxHealthPoints;
+            _particleSystem.Play();
             _healthBar.DOFillAmount(fill, _duration);
             _healthBar.DOColor(new Color(1f, 0.4f, 0.4f, 1f),_duration).OnComplete(() =>
             {
