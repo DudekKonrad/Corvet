@@ -16,6 +16,7 @@ namespace Application.Contexts.GameplayContext
         [SerializeField] private Image _healthBar;
         [SerializeField] private float _duration;
         [SerializeField] private ParticleSystem _particleSystem;
+        [SerializeField] private SpriteRenderer _blink;
     
         private Rigidbody2D _rigidbody;
         private Color _startingColor;
@@ -49,21 +50,30 @@ namespace Application.Contexts.GameplayContext
             _rigidbody.velocity = direction * _gameConfig.EnemySpeed;
         }
 
+        private void Blink()
+        {
+            _blink.gameObject.SetActive(true);
+            _blink.color = new Color(1, 1, 1, 1);
+            _blink.DOColor(new Color(1, 1, 1, 0), _duration).SetLoops(1, LoopType.Yoyo).
+                OnComplete(() => _blink.gameObject.SetActive(false));
+        }
+        
         public void TakeDamage(int damage)
         {
             _enemyModel.CurrentHealthPoints -= damage;
             var fill = (float)_enemyModel.CurrentHealthPoints / _enemyModel.MaxHealthPoints;
             _particleSystem.Play();
+            Blink();
             _healthBar.DOFillAmount(fill, _duration);
+            _healthBar.transform.DOScale(Vector3.one*1.1f,_duration).SetLoops(2, LoopType.Yoyo);
             _healthBar.DOColor(new Color(1f, 0.4f, 0.4f, 1f),_duration).OnComplete(() =>
             {
                 _healthBar.DOColor(_startingColor, _duration);
+                if (_enemyModel.CurrentHealthPoints <= 0)
+                {
+                    Die();
+                }
             });
-            _healthBar.transform.DOScale(Vector3.one*1.1f,_duration).SetLoops(2, LoopType.Yoyo);
-            if (_enemyModel.CurrentHealthPoints <= 0)
-            {
-                Die();
-            }
         }
 
         private void Die()

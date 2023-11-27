@@ -9,19 +9,19 @@ namespace Application.Contexts.GameplayContext.Mediators
     public class ScoreMediator : MonoBehaviour
     {
         [Inject] private readonly SignalBus _signalBus;
-        [Inject] private readonly ScoreModel _scoreModel;
+        [Inject] private readonly ExpModel _expModel;
         
         [SerializeField] private TextMeshProUGUI _text;
 
         private void Start()
         {
-            _signalBus.Subscribe<CorvetProjectSignals.ScoreChangedSignal>(OnScoreChangedSignal);
-            _text.text = $"{_scoreModel.Score}";
+            _signalBus.Subscribe<CorvetProjectSignals.ExpChangedSignal>(OnScoreChangedSignal);
+            _text.text = $"{_expModel.Exp}";
         }
 
         private void OnScoreChangedSignal()
         {
-            _text.text = $"{_scoreModel.Score}";
+            _text.text = $"{_expModel.Exp}";
         }
     }
 }

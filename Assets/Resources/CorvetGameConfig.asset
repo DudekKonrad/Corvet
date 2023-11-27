@@ -16,7 +16,7 @@ MonoBehaviour:
   _damping: 0.2
   _name: Kolomek
   _speed: 7
-  _distanceThreshold: 0.1
+  _followSpeed: 4
   _enemySpeed: 1.5
   _enemyStoppingDistance: 0
   _enemySpawnCooldown: 3

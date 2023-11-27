@@ -13,7 +13,7 @@ namespace Application.Contexts.ProjectContext
         {
             SignalBusInstaller.Install(Container);
             Container.BindInstance(_gameConfig);
-            Container.DeclareSignal<CorvetProjectSignals.ScoreChangedSignal>();
+            Container.DeclareSignal<CorvetProjectSignals.ExpChangedSignal>();
         }
     }
 }

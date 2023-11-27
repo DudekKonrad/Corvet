@@ -2,16 +2,16 @@
 {
     public class CorvetProjectSignals
     {
-        public class ScoreChangedSignal
+        public class ExpChangedSignal
         {
-            private int _score;
+            private int _exp;
 
-            public ScoreChangedSignal(int score)
+            public ExpChangedSignal(int exp)
             {
-                _score = score;
+                _exp = exp;
             }
 
-            public int Score => _score;
+            public int Exp => _exp;
         }
     }
 }

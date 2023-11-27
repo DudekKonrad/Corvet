@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Application.Contexts.ProjectContext.Configs;
+using DG.Tweening;
 using Resources.Configs;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -12,6 +13,8 @@ namespace Application.Contexts.GameplayContext.Mediators
         [Inject] private readonly CorvetGameConfig _gameConfig;
 
         [SerializeField] private ProjectileType _projectileType;
+        [SerializeField] private ParticleSystem _particleSystem;
+        [SerializeField] private float _destroyDelay;
         
         private Rigidbody2D _rigidbody;
         private ObjectPool<ProjectileView> _pool;
@@ -20,10 +23,18 @@ namespace Application.Contexts.GameplayContext.Mediators
         
         public void Init(ObjectPool<ProjectileView> pool, Vector3 direction)
         {
-            _pool = pool;
+            _pool = pool;   
             _direction = direction;
             _direction.Normalize();
+            transform.up = direction;
             gameObject.SetActive(true);
+        }
+
+        private float GetLookAngle(Transform target)
+        {
+            var look = transform.InverseTransformPoint(target.position);
+            var angle = Mathf.Atan2(look.y, look.x) * Mathf.Rad2Deg - 90;
+            return angle;
         }
 
         public void Destroy() => _pool.Release(this);
@@ -44,8 +55,9 @@ namespace Application.Contexts.GameplayContext.Mediators
             if (enemy != null)
             {
                 enemy.TakeDamage(_projectileConfig.Damage);
+                _particleSystem.Play();
             }
-            Destroy();
+            DOVirtual.DelayedCall(_destroyDelay, Destroy);
         }
     }
 }
