@@ -43,8 +43,6 @@ namespace Application.Contexts.GameplayContext
         {
             var targetPosition = _playerController.transform.position;
             var currentPosition = transform.position;
-            var distance = Vector3.Distance(currentPosition, targetPosition);
-
             var direction = targetPosition - currentPosition;
             direction.Normalize();
             _rigidbody.velocity = direction * _gameConfig.EnemySpeed;
@@ -65,7 +63,6 @@ namespace Application.Contexts.GameplayContext
             _particleSystem.Play();
             Blink();
             _healthBar.DOFillAmount(fill, _duration);
-            _healthBar.transform.DOScale(Vector3.one*1.1f,_duration).SetLoops(2, LoopType.Yoyo);
             _healthBar.DOColor(new Color(1f, 0.4f, 0.4f, 1f),_duration).OnComplete(() =>
             {
                 _healthBar.DOColor(_startingColor, _duration);

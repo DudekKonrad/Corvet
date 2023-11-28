@@ -75,3 +75,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameConfig: {fileID: 11400000, guid: 81df7e6e7e202204988ea6fab695f28a, type: 2}
+  _soundConfig: {fileID: 11400000, guid: 0bd1ce0b53a03ea4b830d36e859dd1fc, type: 2}

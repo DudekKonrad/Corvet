@@ -1,18 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
+using Application.Contexts.ProjectContext.Configs;
+using Application.Contexts.ProjectContext.Signals;
 using UnityEngine;
+using UnityEngine.UI;
+using Zenject;
 
+[RequireComponent(typeof(Button))]
 public class ButtonSoundMediator : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Inject] private readonly SignalBus _signalBus;
+
+    [SerializeField] private CorvetAudioClip.SoundType _soundType;
+
+    private Button _button;
+
+    private void Start()
     {
-        
+        _button = GetComponent<Button>();
+        _button.onClick.AddListener(PlayUISound);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void PlayUISound()
     {
-        
+        _signalBus.Fire(new CorvetProjectSignals.PlaySoundSignal(_soundType));
     }
 }
