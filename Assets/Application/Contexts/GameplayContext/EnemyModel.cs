@@ -3,6 +3,11 @@ using Zenject;
 
 namespace Application.Contexts.GameplayContext
 {
+    public enum EnemyType
+    {
+        Rat = 0
+    }
+    
     public class EnemyModel
     {
         [Inject] private readonly CorvetGameConfig _gameConfig;
@@ -10,7 +15,7 @@ namespace Application.Contexts.GameplayContext
         [Inject]
         private void Construct()
         {
-            _maxHealthPoints = _gameConfig.EnemyMaxHp;
+            _maxHealthPoints = _gameConfig.EnemiesDict[EnemyType.Rat].MaxHealthPoints;
         }
 
         private int _maxHealthPoints;

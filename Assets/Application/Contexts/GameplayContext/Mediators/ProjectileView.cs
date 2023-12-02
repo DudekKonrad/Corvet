@@ -37,7 +37,7 @@ namespace Application.Contexts.GameplayContext.Mediators
             return angle;
         }
 
-        public void Destroy() => _pool.Release(this);
+        private void Destroy() => _pool.Release(this);
         private void Start()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
@@ -51,7 +51,7 @@ namespace Application.Contexts.GameplayContext.Mediators
 
         private void OnCollisionEnter2D(Collision2D col)
         {
-            var enemy = col.gameObject.GetComponent<EnemyController>();
+            var enemy = col.gameObject.GetComponent<RatEnemyController>();
             if (enemy != null)
             {
                 enemy.TakeDamage(_projectileConfig.Damage);

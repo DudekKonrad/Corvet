@@ -26,7 +26,6 @@ namespace Application.Contexts.GameplayContext.Mediators
                 transform.DOScale(Vector3.one * 0.1f, _duration);
                 transform.DOMove(_playerModel.PlayerPosition, _duration).SetEase(Ease.InSine).OnComplete(() =>
                 {
-                    Debug.Log($"Exp final collect!");
                     _expModel.AddExp(_value);
                     transform.parent.gameObject.SetActive(false);
                 });

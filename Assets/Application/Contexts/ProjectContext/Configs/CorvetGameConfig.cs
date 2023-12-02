@@ -1,4 +1,7 @@
-﻿using Resources.Configs;
+﻿using Application.Contexts.GameplayContext;
+using Application.Utils;
+using AYellowpaper.SerializedCollections;
+using Resources.Configs;
 using UnityEngine;
 
 namespace Application.Contexts.ProjectContext.Configs
@@ -15,12 +18,9 @@ namespace Application.Contexts.ProjectContext.Configs
         [SerializeField] private int _speed;
         
         [Header("Collectables")] [SerializeField] private float _followSpeed;
-        
-        [Header("Enemies")] [SerializeField] private float _enemySpeed;
-        [SerializeField] private float _enemyStoppingDistance;
-        [SerializeField] private float _enemySpawnCooldown;
-        [SerializeField] private int _enemyMaxHp;
 
+        [Header("Enemies")]  [SerializedDictionary("Element Type", "Description")]
+        [SerializeField] private SerializedDictionary<EnemyType, EnemyConfig> _enemiesDict;
         [Header("Projectiles")] [SerializeField] private ProjectileConfig[] _projectiles;
 
 
@@ -28,10 +28,8 @@ namespace Application.Contexts.ProjectContext.Configs
         public string Name => _name;
         public int Speed => _speed;
         public float FollowSpeed => _followSpeed;
-        public float EnemySpeed => _enemySpeed;
-        public float EnemyStoppingDistance => _enemyStoppingDistance;
+        public SerializedDictionary<EnemyType, EnemyConfig> EnemiesDict => _enemiesDict;
         public ProjectileConfig[] Projectiles => _projectiles;
-        public float EnemySpawnCooldown => _enemySpawnCooldown;
-        public int EnemyMaxHp => _enemyMaxHp;
+
     }
 }

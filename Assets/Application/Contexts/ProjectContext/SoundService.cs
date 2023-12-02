@@ -33,7 +33,6 @@ namespace Application.Contexts.ProjectContext
 
         private void OnPlaySoundSignal(CorvetProjectSignals.PlaySoundSignal signal)
         {
-            Debug.Log($"Will play sound: {signal.Type}");
             var clip = _dictionary[signal.Type];
             _audioSource.clip = clip;
             _audioSource.Play();

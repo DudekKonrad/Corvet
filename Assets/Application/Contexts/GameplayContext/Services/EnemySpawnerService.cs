@@ -13,25 +13,23 @@ namespace Application.Contexts.GameplayContext.Services
         [Inject] private readonly DiContainer _diContainer;
         [Inject] private readonly CorvetGameConfig _gameConfig;
 
-        [SerializeField] private EnemyController _enemyPrefab;
 
-        private ObjectPool<EnemyController> _enemiesPool;
-        private List<EnemyController> _enemies = new List<EnemyController>();
-        [SerializeField] private float _spawnCooldown;
-
-        public ObjectPool<EnemyController> EnemiesPool => _enemiesPool;
-        public List<EnemyController> Enemies => _enemies;
-
+        private ObjectPool<RatEnemyController> _enemiesPool;
+        private List<RatEnemyController> _enemies = new List<RatEnemyController>();
+        private float _spawnCooldown;
+        public List<RatEnemyController> Enemies => _enemies;
+        
         private void Start()
         {
-            _enemiesPool = new ObjectPool<EnemyController>(OnCreateEnemy, OnGetEnemy, OnReleaseEnemy, 
+            _enemiesPool = new ObjectPool<RatEnemyController>(OnCreateEnemy, OnGetEnemy, OnReleaseEnemy, 
                 defaultCapacity: 100);
-            _spawnCooldown = _gameConfig.EnemySpawnCooldown;
+            _spawnCooldown = _gameConfig.EnemiesDict[EnemyType.Rat].SpawnCooldown;  
         }
 
-        private EnemyController OnCreateEnemy()
+        private RatEnemyController OnCreateEnemy()
         {
-            var enemy = _diContainer.InstantiatePrefabForComponent<EnemyController>(_enemyPrefab, _enemiesContainer);
+            var enemy = _diContainer.InstantiatePrefabForComponent<RatEnemyController>(
+                _gameConfig.EnemiesDict[EnemyType.Rat].EnemyPrefab, _enemiesContainer);
             _enemies.Add(enemy);
             return enemy;
         }
@@ -43,21 +41,21 @@ namespace Application.Contexts.GameplayContext.Services
             {
                 var enemy = _enemiesPool.Get();
                 enemy.Init(_enemiesPool);
-                _spawnCooldown = _gameConfig.EnemySpawnCooldown;
+                _spawnCooldown = _gameConfig.EnemiesDict[EnemyType.Rat].SpawnCooldown;
             }
         }
 
-        private void OnReleaseEnemy(EnemyController enemy)
+        private void OnReleaseEnemy(RatEnemyController ratEnemy)
         {
-            enemy.IsActiveInPool = false;
-            enemy.gameObject.SetActive(false);
+            ratEnemy.IsActiveInPool = false;
+            ratEnemy.gameObject.SetActive(false);
         }
 
-        private void OnGetEnemy(EnemyController enemy)
+        private void OnGetEnemy(RatEnemyController ratEnemy)
         {
-            enemy.transform.localPosition = Vector3.zero;
-            enemy.IsActiveInPool = true; 
-            enemy.gameObject.SetActive(true);
+            ratEnemy.transform.localPosition = Vector3.zero;
+            ratEnemy.IsActiveInPool = true; 
+            ratEnemy.gameObject.SetActive(true);
         }
     }
 }

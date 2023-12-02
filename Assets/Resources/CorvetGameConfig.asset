@@ -17,10 +17,14 @@ MonoBehaviour:
   _name: Kolomek
   _speed: 7
   _followSpeed: 4
-  _enemySpeed: 1.5
-  _enemyStoppingDistance: 0
-  _enemySpawnCooldown: 3
-  _enemyMaxHp: 40
+  _enemiesDict:
+    _serializedList:
+    - Key: 0
+      Value:
+        _enemyPrefab: {fileID: 2185067665961536094, guid: 4da02c7f911f3584b88bce47cc2fb492, type: 3}
+        _maxHealthPoints: 50
+        _spawnCooldown: 5
+        _movementSpeed: 4
   _projectiles:
   - _type: 0
     _projectileSpeed: 4

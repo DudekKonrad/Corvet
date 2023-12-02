@@ -23,10 +23,10 @@ namespace Application.Contexts.GameplayContext.Mediators
             var inputValue = value.Get<Vector2>();
             _playerInputModel.Movement = inputValue;
         }
+        
         [UsedImplicitly]
         private void OnSpaceClick(InputValue value)
         {
-            Debug.Log($"Spcae click value: {value.isPressed}");
             _playerInputModel.SpaceClick = value.isPressed;
         }
     }

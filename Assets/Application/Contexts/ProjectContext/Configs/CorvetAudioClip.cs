@@ -8,7 +8,8 @@ namespace Application.Contexts.ProjectContext.Configs
     {
         public enum SoundType
         {
-            OnClick = 0
+            OnButtonClick = 0,
+            OnButtonSelect = 1
         }
 
         [SerializeField] private SoundType _soundType;
