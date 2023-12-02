@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Application.Contexts.GameplayContext
 {
-    public class RatEnemyController : MonoBehaviour
+    public class RatEnemyController : MonoBehaviour, IEnemy
     {
         [Inject(Id = nameof(_playerController))] private readonly PlayerController _playerController;
         [Inject] private readonly CorvetGameConfig _gameConfig;
@@ -20,9 +20,12 @@ namespace Application.Contexts.GameplayContext
     
         private Rigidbody2D _rigidbody;
         private Color _startingColor;
+        private ObjectPool<IEnemy> _pool;
 
-        public bool IsActiveInPool;
-        private ObjectPool<RatEnemyController> _pool;
+        public GameObject GameObject => gameObject;
+        public EnemyType EnemyType => EnemyType.Rat;
+        public bool IsActiveInPool { get; set; }
+
 
         private void Start()
         {
@@ -31,19 +34,22 @@ namespace Application.Contexts.GameplayContext
             _startingColor = _healthBar.color;
         }
 
-        public void Init(ObjectPool<RatEnemyController> pool)
+        public void Init(ObjectPool<IEnemy> enemiesPool)
         {
-            _pool = pool;
-            _enemyModel.CurrentHealthPoints = _gameConfig.EnemiesDict[EnemyType.Rat].MaxHealthPoints;
+            _pool = enemiesPool;
+            _enemyModel.CurrentHealthPoints = _gameConfig.EnemiesDict[EnemyType].MaxHealthPoints;
             var fill = (float)_enemyModel.CurrentHealthPoints / _enemyModel.MaxHealthPoints;
             _healthBar.fillAmount = fill;
         }
 
         private void FixedUpdate()
         {
-            var targetPosition = _playerController.transform.position;
-            var currentPosition = transform.position;
-            var direction = targetPosition - currentPosition;
+            Follow(_playerController.transform.position);
+        }
+
+        private void Follow(Vector3 target)
+        {
+            var direction = target - transform.position;
             direction.Normalize();
             _rigidbody.velocity = direction * _gameConfig.EnemiesDict[EnemyType.Rat].MovementSpeed;
         }
@@ -55,7 +61,7 @@ namespace Application.Contexts.GameplayContext
             _blink.DOColor(new Color(1, 1, 1, 0), _duration).SetLoops(1, LoopType.Yoyo).
                 OnComplete(() => _blink.gameObject.SetActive(false));
         }
-        
+
         public void TakeDamage(int damage)
         {
             _enemyModel.CurrentHealthPoints -= damage;

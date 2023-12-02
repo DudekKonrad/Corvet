@@ -66,7 +66,8 @@ namespace Application.Contexts.GameplayContext
         }
         private void Shoot()
         {
-            var enemy = GetClosestEnemy(_enemySpawnerService.Enemies.Where(_ => _.IsActiveInPool).Select(_ => _.transform));
+            var enemy = GetClosestEnemy(_enemySpawnerService.Enemies.Where(_ => _.IsActiveInPool).Select(_ => 
+                _.GameObject.transform));
             if (enemy != null)
             {
                 var projectile = _pool.Get();

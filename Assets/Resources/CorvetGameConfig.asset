@@ -22,9 +22,9 @@ MonoBehaviour:
     - Key: 0
       Value:
         _enemyPrefab: {fileID: 2185067665961536094, guid: 4da02c7f911f3584b88bce47cc2fb492, type: 3}
-        _maxHealthPoints: 50
+        _maxHealthPoints: 30
         _spawnCooldown: 5
-        _movementSpeed: 4
+        _movementSpeed: 2
   _projectiles:
   - _type: 0
     _projectileSpeed: 4

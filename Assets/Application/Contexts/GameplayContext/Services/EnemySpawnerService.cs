@@ -12,17 +12,15 @@ namespace Application.Contexts.GameplayContext.Services
         [Inject(Id = nameof(_enemiesContainer))] private readonly Transform _enemiesContainer;
         [Inject] private readonly DiContainer _diContainer;
         [Inject] private readonly CorvetGameConfig _gameConfig;
-
-
-        private ObjectPool<RatEnemyController> _enemiesPool;
-        private List<RatEnemyController> _enemies = new List<RatEnemyController>();
+        
+        private ObjectPool<IEnemy> _enemiesPool;
+        private List<IEnemy> _enemies = new List<IEnemy>();
         private float _spawnCooldown;
-        public List<RatEnemyController> Enemies => _enemies;
+        public List<IEnemy> Enemies => _enemies;
         
         private void Start()
         {
-            _enemiesPool = new ObjectPool<RatEnemyController>(OnCreateEnemy, OnGetEnemy, OnReleaseEnemy, 
-                defaultCapacity: 100);
+            _enemiesPool = new ObjectPool<IEnemy>(OnCreateEnemy, OnGetEnemy, OnReleaseEnemy, defaultCapacity: 100);
             _spawnCooldown = _gameConfig.EnemiesDict[EnemyType.Rat].SpawnCooldown;  
         }
 
@@ -39,23 +37,27 @@ namespace Application.Contexts.GameplayContext.Services
             Timer.ProcessTime(ref _spawnCooldown, Time.deltaTime);
             if (_spawnCooldown <= 0)
             {
-                var enemy = _enemiesPool.Get();
-                enemy.Init(_enemiesPool);
-                _spawnCooldown = _gameConfig.EnemiesDict[EnemyType.Rat].SpawnCooldown;
+                SpawnEnemy(_enemiesPool.Get());
             }
         }
 
-        private void OnReleaseEnemy(RatEnemyController ratEnemy)
+        private void SpawnEnemy(IEnemy enemy)
         {
-            ratEnemy.IsActiveInPool = false;
-            ratEnemy.gameObject.SetActive(false);
+            enemy.Init(_enemiesPool);
+            _spawnCooldown = _gameConfig.EnemiesDict[enemy.EnemyType].SpawnCooldown;
         }
 
-        private void OnGetEnemy(RatEnemyController ratEnemy)
+        private void OnReleaseEnemy(IEnemy enemy)
         {
-            ratEnemy.transform.localPosition = Vector3.zero;
-            ratEnemy.IsActiveInPool = true; 
-            ratEnemy.gameObject.SetActive(true);
+            enemy.IsActiveInPool = false;
+            enemy.GameObject.SetActive(false);
+        }
+
+        private void OnGetEnemy(IEnemy enemy)
+        {
+            enemy.GameObject.transform.localPosition = Vector3.zero;
+            enemy.IsActiveInPool = true;
+            enemy.GameObject.SetActive(true);
         }
     }
 }
