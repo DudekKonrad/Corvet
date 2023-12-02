@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Application.Contexts.ProjectContext.Configs;
+using Application.Utils;
 using Application.Utils.TimeUtils;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -13,15 +14,20 @@ namespace Application.Contexts.GameplayContext.Services
         [Inject] private readonly DiContainer _diContainer;
         [Inject] private readonly CorvetGameConfig _gameConfig;
         
+        [SerializeField] private GameObject _spawnMarker;
+        
         private ObjectPool<IEnemy> _enemiesPool;
         private List<IEnemy> _enemies = new List<IEnemy>();
         private float _spawnCooldown;
+        private Vector3 _spawnPosition;
         public List<IEnemy> Enemies => _enemies;
         
         private void Start()
         {
             _enemiesPool = new ObjectPool<IEnemy>(OnCreateEnemy, OnGetEnemy, OnReleaseEnemy, defaultCapacity: 100);
-            _spawnCooldown = _gameConfig.EnemiesDict[EnemyType.Rat].SpawnCooldown;  
+            _spawnCooldown = _gameConfig.EnemiesDict[EnemyType.Rat].SpawnCooldown;
+            _spawnPosition = PositionUtils.RandomPositionInRange(-9f, 9f, -9f, 9f);
+            _spawnMarker.transform.position = _spawnPosition;
         }
 
         private RatEnemyController OnCreateEnemy()
@@ -44,7 +50,10 @@ namespace Application.Contexts.GameplayContext.Services
         private void SpawnEnemy(IEnemy enemy)
         {
             enemy.Init(_enemiesPool);
+            enemy.GameObject.transform.position = _spawnPosition;
             _spawnCooldown = _gameConfig.EnemiesDict[enemy.EnemyType].SpawnCooldown;
+            _spawnPosition = PositionUtils.RandomPositionInRange(-9f, 9f, -9f, 9f);
+            _spawnMarker.transform.position = _spawnPosition;
         }
 
         private void OnReleaseEnemy(IEnemy enemy)
