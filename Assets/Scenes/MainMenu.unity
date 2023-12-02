@@ -2070,6 +2070,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 161911821}
     m_Modifications:
+    - target: {fileID: 1951982687971332553, guid: 3c28b1e948ddc8647986f1c5df2d0adf, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -408.82477
+      objectReference: {fileID: 0}
     - target: {fileID: 2029917427235488944, guid: 3c28b1e948ddc8647986f1c5df2d0adf, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -2165,6 +2169,14 @@ PrefabInstance:
     - target: {fileID: 2735159815079249442, guid: 3c28b1e948ddc8647986f1c5df2d0adf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6545872153156347293, guid: 3c28b1e948ddc8647986f1c5df2d0adf, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -188.82475
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724357191263236771, guid: 3c28b1e948ddc8647986f1c5df2d0adf, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -208.82475
       objectReference: {fileID: 0}
     - target: {fileID: 8661257129783095222, guid: 3c28b1e948ddc8647986f1c5df2d0adf, type: 3}
       propertyPath: m_Name

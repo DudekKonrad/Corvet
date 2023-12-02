@@ -31,13 +31,6 @@ namespace Application.Contexts.GameplayContext.Mediators
             gameObject.SetActive(true);
         }
 
-        private float GetLookAngle(Transform target)
-        {
-            var look = transform.InverseTransformPoint(target.position);
-            var angle = Mathf.Atan2(look.y, look.x) * Mathf.Rad2Deg - 90;
-            return angle;
-        }
-
         private void Destroy() => _pool.Release(this);
         private void Start()
         {

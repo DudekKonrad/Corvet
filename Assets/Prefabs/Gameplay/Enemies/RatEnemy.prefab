@@ -223,8 +223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81fb9a7f85e4a1c47830f8be2becce00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthBar: {fileID: 6069574170908945256}
-  _duration: 0.2
+  _healthBar: {fileID: 1756071462684931220}
+  _duration: 0.1
   _particleSystem: {fileID: 3011362986639340822}
   _blink: {fileID: 9095252844900074000}
 --- !u!1 &3296117623282234841
@@ -645,15 +645,15 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c9d346f088945245a8364a16a345df2, type: 3}
---- !u!114 &6069574170908945256 stripped
+--- !u!114 &1756071462684931220 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2395439667229154880, guid: 3c9d346f088945245a8364a16a345df2, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7880150992047702460, guid: 3c9d346f088945245a8364a16a345df2, type: 3}
   m_PrefabInstance: {fileID: 8432209801013572904}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: e379f9736d3581449914894c5d2bcd7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &7916660851728508307 stripped

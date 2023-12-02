@@ -1,10 +1,10 @@
 using Application.Contexts.GameplayContext.Models;
 using Application.Contexts.GameplayContext.Services;
 using Application.Contexts.ProjectContext.Configs;
+using Application.Utils;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Application.Contexts.GameplayContext.Controllers
@@ -16,25 +16,21 @@ namespace Application.Contexts.GameplayContext.Controllers
         [Inject] private readonly CorvetGameConfig _gameConfig;
         [Inject] private readonly EnemyModel _enemyModel;
 
-        [SerializeField] private Image _healthBar;
+        [SerializeField] private FillBar _healthBar;
         [SerializeField] private float _duration;
-        [SerializeField] private ParticleSystem _particleSystem;
         [SerializeField] private SpriteRenderer _blink;
     
         private Rigidbody2D _rigidbody;
-        private Color _startingColor;
         private ObjectPool<IEnemy> _pool;
 
         public GameObject GameObject => gameObject;
         public EnemyType EnemyType => EnemyType.Rat;
         public bool IsActiveInPool { get; set; }
-
-
+        
         private void Start()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _enemyModel.CurrentHealthPoints = _enemyModel.MaxHealthPoints;
-            _startingColor = _healthBar.color;
         }
 
         public void Init(ObjectPool<IEnemy> enemiesPool)
@@ -42,7 +38,7 @@ namespace Application.Contexts.GameplayContext.Controllers
             _pool = enemiesPool;
             _enemyModel.CurrentHealthPoints = _gameConfig.EnemiesDict[EnemyType].MaxHealthPoints;
             var fill = (float)_enemyModel.CurrentHealthPoints / _enemyModel.MaxHealthPoints;
-            _healthBar.fillAmount = fill;
+            _healthBar.Fill.fillAmount = fill;
         }
 
         private void FixedUpdate()
@@ -69,12 +65,9 @@ namespace Application.Contexts.GameplayContext.Controllers
         {
             _enemyModel.CurrentHealthPoints -= damage;
             var fill = (float)_enemyModel.CurrentHealthPoints / _enemyModel.MaxHealthPoints;
-            _particleSystem.Play();
             Blink();
-            _healthBar.DOFillAmount(fill, _duration);
-            _healthBar.DOColor(new Color(1f, 0.4f, 0.4f, 1f),_duration).OnComplete(() =>
+            _healthBar.SetFill(fill, _duration, Color.yellow).OnComplete(() =>
             {
-                _healthBar.DOColor(_startingColor, _duration);
                 if (_enemyModel.CurrentHealthPoints <= 0)
                 {
                     Die();

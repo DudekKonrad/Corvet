@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _panelDuration: 0.4
   _speed: 7
-  _fireRate: 4
+  _fireRate: 0.5
   _expDictionary:
     _serializedList:
     - Key: 0

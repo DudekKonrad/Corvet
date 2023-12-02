@@ -310,6 +310,7 @@ MonoBehaviour:
   _expBody: {fileID: 1197481060593531671}
   _shadow: {fileID: 8490586998588898704}
   IsActiveInPool: 0
+  IsCollected: 0
 --- !u!1 &8490586998588898704
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,7 +338,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.4, z: 0}
-  m_LocalScale: {x: 0.02, y: 0.01, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8542880115526875545}

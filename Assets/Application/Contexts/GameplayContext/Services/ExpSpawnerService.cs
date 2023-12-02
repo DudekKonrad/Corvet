@@ -12,10 +12,11 @@ namespace Application.Contexts.GameplayContext.Services
         [Inject] private readonly DiContainer _diContainer;
         [Inject(Id = nameof(_expContainer))] private readonly Transform _expContainer;
         [Inject] private readonly CorvetGameConfig _gameConfig;
+        private readonly List<ExpMediator> _expList = new List<ExpMediator>();
 
         public ObjectPool<ExpMediator> ExpPool { get; private set; }
 
-        public List<ExpMediator> ExpList { get; } = new();
+        private List<ExpMediator> ExpList => _expList;
 
         [Inject]
         private void Construct()
@@ -36,6 +37,7 @@ namespace Application.Contexts.GameplayContext.Services
         private void OnReleaseExp(ExpMediator expMediator)
         {
             expMediator.IsActiveInPool = false;
+            expMediator.IsCollected = false;
             expMediator.gameObject.SetActive(false);
         }
 

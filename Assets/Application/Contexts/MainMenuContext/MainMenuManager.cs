@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,14 +5,11 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Zenject;
 
 namespace Application.Contexts.MainMenuContext
 {
     public class MainMenuManager : MonoBehaviour
     {
-        [Inject] private readonly SignalBus _signalBus;
-        
         [SerializeField] private GameObject _loadingScreen;
         [SerializeField] private Image _loadingFill;
         [SerializeField] private float _duration = 0.4f;

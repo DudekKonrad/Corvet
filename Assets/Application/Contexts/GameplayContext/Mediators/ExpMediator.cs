@@ -19,10 +19,10 @@ namespace Application.Contexts.GameplayContext.Mediators
         [SerializeField] private GameObject _expBody;
         [SerializeField] private GameObject _shadow;
 
-        private bool _isCollected;
         private ObjectPool<ExpMediator> _pool;
 
         public bool IsActiveInPool;
+        public bool IsCollected;
 
         private void Start()
         {
@@ -37,20 +37,20 @@ namespace Application.Contexts.GameplayContext.Mediators
         public void SetAnim()
         {
             _expBody.transform.DOLocalMoveY(0.05f, _duration).SetLoops(-1, LoopType.Yoyo);
-            _shadow.transform.DOScale(new Vector3(0.03f, 0.015f, 0),_duration).SetLoops(-1, LoopType.Yoyo);  
+            _shadow.transform.DOScale(new Vector3(0.3f, 0.15f, 0),_duration).SetLoops(-1, LoopType.Yoyo);  
         }
 
         private void OnTriggerEnter2D(Collider2D col)
         {
             if (col.gameObject.GetComponent<PlayerController>())
             {
-                _isCollected = true;
+                IsCollected = true;
             }
         }
 
         private void Update()
         {
-            if (_isCollected)
+            if (IsCollected)
             {
                 var step = _gameConfig.ExpDict[_expType].FollowSpeed * Time.deltaTime; 
                 transform.position = Vector3.MoveTowards(transform.position, _playerModel.PlayerPosition, step);
