@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 232737950383537666}
   - component: {fileID: 1878835528931379854}
   - component: {fileID: 5944717264614694566}
-  - component: {fileID: 8361261615008747626}
   m_Layer: 6
   m_Name: ExpBody
   m_TagString: Untagged
@@ -131,21 +130,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.64}
   m_EdgeRadius: 0
---- !u!114 &8361261615008747626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1197481060593531671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a09332d497a24ce89aae8033efb7bff0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _duration: 0.1
-  _value: 5
-  IsActiveInPool: 0
 --- !u!1 &4185497293762240009
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,9 +305,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f57fa0d9c96e1d4a87845207eaaa170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _duration: 0.35
+  _expType: 0
   _expBody: {fileID: 1197481060593531671}
   _shadow: {fileID: 8490586998588898704}
-  _duration: 0.35
+  IsActiveInPool: 0
 --- !u!1 &8490586998588898704
 GameObject:
   m_ObjectHideFlags: 0

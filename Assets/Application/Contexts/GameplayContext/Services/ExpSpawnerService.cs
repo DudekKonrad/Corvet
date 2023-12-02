@@ -7,18 +7,18 @@ using Zenject;
 
 namespace Application.Contexts.GameplayContext.Services
 {
-    public class ExpSpawnerService : MonoBehaviour
+    public class ExpSpawnerService
     {
-        [SerializeField] private ExpMediator _expPrefab;
         [Inject] private readonly DiContainer _diContainer;
         [Inject(Id = nameof(_expContainer))] private readonly Transform _expContainer;
         [Inject] private readonly CorvetGameConfig _gameConfig;
 
         public ObjectPool<ExpMediator> ExpPool { get; private set; }
 
-        public List<ExpMediator> Exps { get; } = new();
+        public List<ExpMediator> ExpList { get; } = new();
 
-        private void Start()
+        [Inject]
+        private void Construct()
         {
             ExpPool = new ObjectPool<ExpMediator>(OnCreateExp, OnGetExp, OnReleaseExp,
                 defaultCapacity: 100);
@@ -26,8 +26,10 @@ namespace Application.Contexts.GameplayContext.Services
 
         private ExpMediator OnCreateExp()
         {
-            var exp = _diContainer.InstantiatePrefabForComponent<ExpMediator>(_expPrefab, _expContainer);
-            Exps.Add(exp);
+            var exp = _diContainer.InstantiatePrefabForComponent<ExpMediator>(
+                _gameConfig.ExpDict[ExpType.Medium].Prefab, _expContainer);
+            exp.Init(ExpPool);
+            ExpList.Add(exp);
             return exp;
         }
 

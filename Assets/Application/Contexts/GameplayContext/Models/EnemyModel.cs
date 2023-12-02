@@ -1,11 +1,12 @@
 ﻿using Application.Contexts.ProjectContext.Configs;
 using Zenject;
 
-namespace Application.Contexts.GameplayContext
+namespace Application.Contexts.GameplayContext.Models
 {
     public enum EnemyType
     {
-        Rat = 0
+        Rat = 0,
+        Square = 1
     }
     
     public class EnemyModel

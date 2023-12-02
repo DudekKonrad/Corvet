@@ -1,3 +1,5 @@
+using Application.Contexts.GameplayContext.Models;
+using Application.Contexts.GameplayContext.Services;
 using Application.Contexts.ProjectContext.Configs;
 using DG.Tweening;
 using UnityEngine;
@@ -5,11 +7,12 @@ using UnityEngine.Pool;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Application.Contexts.GameplayContext
+namespace Application.Contexts.GameplayContext.Controllers
 {
     public class RatEnemyController : MonoBehaviour, IEnemy
     {
         [Inject(Id = nameof(_playerController))] private readonly PlayerController _playerController;
+        [Inject] private readonly ExpSpawnerService _expSpawnerService;
         [Inject] private readonly CorvetGameConfig _gameConfig;
         [Inject] private readonly EnemyModel _enemyModel;
 
@@ -81,6 +84,8 @@ namespace Application.Contexts.GameplayContext
 
         private void Die()
         {
+            var expPoint = _expSpawnerService.ExpPool.Get();
+            expPoint.transform.position = transform.position;
             _pool.Release(this);
         }
     }

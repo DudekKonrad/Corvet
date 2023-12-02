@@ -1,4 +1,4 @@
-﻿using Application.Contexts.GameplayContext;
+﻿using Application.Contexts.GameplayContext.Models;
 using AYellowpaper.SerializedCollections;
 using Resources.Configs;
 using UnityEngine;
@@ -8,27 +8,28 @@ namespace Application.Contexts.ProjectContext.Configs
     [CreateAssetMenu(fileName = "CorvetGameConfig", menuName = "Configs/CorvetGameConfig", order = 1)]
     public class CorvetGameConfig : ScriptableObject
     {
-        [Header("UI")] [SerializeField] private float _panelDuration;
+        [Header("UI")]
+        [SerializeField] private float _panelDuration;
         
-        [Header("Camera")] [SerializeField] private float _damping;
-        public float Damping => _damping;
-
-        [Header("Player")] [SerializeField] private string _name;
+        [Header("Player")]
         [SerializeField] private int _speed;
-        
-        [Header("Collectables")] [SerializeField] private float _followSpeed;
+        [SerializeField] private float _fireRate;
 
-        [Header("Enemies")]  [SerializedDictionary("Element Type", "Description")]
+        [Header("Collectables")] [SerializedDictionary("Exp Type", "Exp Config")] 
+        [SerializeField] private SerializedDictionary<ExpType, ExpConfig> _expDictionary;
+
+        [Header("Enemies")]  [SerializedDictionary("Enemy Type", "Enemy Config")]
         [SerializeField] private SerializedDictionary<EnemyType, EnemyConfig> _enemiesDict;
-        [Header("Projectiles")] [SerializeField] private ProjectileConfig[] _projectiles;
+        
+        [Header("Projectiles")]
+        [SerializeField] private ProjectileConfig[] _projectiles;
 
 
         public float PanelDuration => _panelDuration;
-        public string Name => _name;
         public int Speed => _speed;
-        public float FollowSpeed => _followSpeed;
+        public float FireRate => _fireRate;
         public SerializedDictionary<EnemyType, EnemyConfig> EnemiesDict => _enemiesDict;
+        public SerializedDictionary<ExpType, ExpConfig> ExpDict => _expDictionary;
         public ProjectileConfig[] Projectiles => _projectiles;
-
     }
 }

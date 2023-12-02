@@ -13,10 +13,15 @@ MonoBehaviour:
   m_Name: CorvetGameConfig
   m_EditorClassIdentifier: 
   _panelDuration: 0.4
-  _damping: 0.2
-  _name: Kolomek
   _speed: 7
-  _followSpeed: 4
+  _fireRate: 4
+  _expDictionary:
+    _serializedList:
+    - Key: 0
+      Value:
+        _prefab: {fileID: 6392838756806992137, guid: ee27faf8a54997d468e389f6f3aeed73, type: 3}
+        _value: 5
+        _followSpeed: 5
   _enemiesDict:
     _serializedList:
     - Key: 0

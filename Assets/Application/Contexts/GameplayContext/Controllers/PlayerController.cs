@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 using Zenject;
 
-namespace Application.Contexts.GameplayContext
+namespace Application.Contexts.GameplayContext.Controllers
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerController : MonoBehaviour
@@ -17,20 +17,19 @@ namespace Application.Contexts.GameplayContext
         [Inject] private readonly CorvetGameConfig _gameConfig;
         [Inject] private readonly PlayerInputModel _playerInput;
         [Inject] private readonly PlayerModel _playerModel;
-
-        [SerializeField] private Rigidbody2D _rigidbody;
-        [SerializeField] private float _fireRate;
+        [Inject(Id = nameof(_enemySpawnerService))] private EnemySpawnerService _enemySpawnerService;
+        
         [SerializeField] private ProjectileView _projectilePrefab;
-        [SerializeField] private EnemySpawnerService _enemySpawnerService;
 
         private ObjectPool<ProjectileView> _pool;
-
+        private Rigidbody2D _rigidbody;
         private float _timer;
 
         private void Awake()
         {
             _pool = new ObjectPool<ProjectileView>(OnCreateProjectile,OnGetProjectile, OnReleaseProjectile, 
                 defaultCapacity: 200);
+            _rigidbody = GetComponent<Rigidbody2D>();
         }
 
         private void OnGetProjectile(ProjectileView obj)
@@ -58,7 +57,7 @@ namespace Application.Contexts.GameplayContext
         private void Update()
         {
             _timer += Time.deltaTime;
-            if (_timer >= 1f/_fireRate)
+            if (_timer >= 1f/_gameConfig.FireRate)
             {
                 _timer = 0;
                 Shoot();

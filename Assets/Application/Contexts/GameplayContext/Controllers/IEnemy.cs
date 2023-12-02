@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using Application.Contexts.GameplayContext.Models;
+using UnityEngine;
 using UnityEngine.Pool;
 
-namespace Application.Contexts.GameplayContext
+namespace Application.Contexts.GameplayContext.Controllers
 {
     public interface IEnemy
     {
