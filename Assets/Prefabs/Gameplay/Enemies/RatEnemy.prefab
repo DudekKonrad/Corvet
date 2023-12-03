@@ -120,7 +120,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1333061144402492144
 Transform:
   m_ObjectHideFlags: 0
@@ -225,7 +225,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 1756071462684931220}
   _duration: 0.1
-  _particleSystem: {fileID: 3011362986639340822}
   _blink: {fileID: 9095252844900074000}
 --- !u!1 &3296117623282234841
 GameObject:
@@ -348,8 +347,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 10}
+  m_AnchoredPosition: {x: 0, y: 0.0151}
+  m_SizeDelta: {x: 5, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &9095252844900074000
 SpriteRenderer:
@@ -722,11 +721,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 446efeae85d779e40acda12fa94e4929, type: 3}
---- !u!198 &3011362986639340822 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5765072975892166799, guid: 446efeae85d779e40acda12fa94e4929, type: 3}
-  m_PrefabInstance: {fileID: 8776150070709194137}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3206466219051034347 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6175717069870836594, guid: 446efeae85d779e40acda12fa94e4929, type: 3}

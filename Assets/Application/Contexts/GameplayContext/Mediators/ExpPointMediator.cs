@@ -8,7 +8,7 @@ using Zenject;
 
 namespace Application.Contexts.GameplayContext.Mediators
 {
-    public class ExpMediator : MonoBehaviour
+    public class ExpPointMediator : MonoBehaviour
     {
         [Inject] private readonly CorvetGameConfig _gameConfig;
         [Inject] private readonly PlayerModel _playerModel;
@@ -19,25 +19,20 @@ namespace Application.Contexts.GameplayContext.Mediators
         [SerializeField] private GameObject _expBody;
         [SerializeField] private GameObject _shadow;
 
-        private ObjectPool<ExpMediator> _pool;
+        private ObjectPool<ExpPointMediator> _pool;
 
         public bool IsActiveInPool;
         public bool IsCollected;
 
         private void Start()
         {
-            SetAnim();
-        }
-
-        public void Init(ObjectPool<ExpMediator> pool)
-        {
-            _pool = pool;
-        }
-
-        public void SetAnim()
-        {
             _expBody.transform.DOLocalMoveY(0.05f, _duration).SetLoops(-1, LoopType.Yoyo);
             _shadow.transform.DOScale(new Vector3(0.3f, 0.15f, 0),_duration).SetLoops(-1, LoopType.Yoyo);  
+        }
+
+        public void Init(ObjectPool<ExpPointMediator> pool)
+        {
+            _pool = pool;
         }
 
         private void OnTriggerEnter2D(Collider2D col)

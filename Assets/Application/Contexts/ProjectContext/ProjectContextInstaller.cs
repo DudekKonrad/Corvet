@@ -17,6 +17,7 @@ namespace Application.Contexts.ProjectContext
             Container.BindInstance(_soundConfig);
             Container.BindInterfacesAndSelfTo<SoundService>().AsSingle().NonLazy();
             Container.DeclareSignal<CorvetProjectSignals.ExpChangedSignal>();
+            Container.DeclareSignal<CorvetProjectSignals.LevelUpSignal>();
             Container.DeclareSignal<CorvetProjectSignals.PlaySoundSignal>();
         }
     }

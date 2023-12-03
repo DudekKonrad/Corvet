@@ -16,6 +16,11 @@ namespace Application.Contexts.ProjectContext.Signals
             public int Exp => _exp;
         }
         
+        public class LevelUpSignal
+        {
+            
+        }
+        
         public class PlaySoundSignal
         {
             private CorvetAudioClip.SoundType _soundType;

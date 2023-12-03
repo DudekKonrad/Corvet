@@ -5,7 +5,8 @@ namespace Application.Contexts.GameplayContext.Models
     public class PlayerModel
     {
         private Vector3 _playerPosition;
-        private int _maxhealth;
+        private int _maxHealth;
+        private int _currentHealth;
 
         public void SetPlayerPosition(Vector3 position)
         {
@@ -13,6 +14,7 @@ namespace Application.Contexts.GameplayContext.Models
         }
 
         public Vector3 PlayerPosition => _playerPosition;
-        public int MaxHealth => _maxhealth;
+        public int MaxHealth => _maxHealth;
+        public int CurrentHealth => _currentHealth;
     }
 }

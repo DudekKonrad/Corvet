@@ -17,6 +17,8 @@ namespace Application.Contexts.ProjectContext.Configs
 
         [Header("Collectables")] [SerializedDictionary("Exp Type", "Exp Config")] 
         [SerializeField] private SerializedDictionary<ExpType, ExpConfig> _expDictionary;
+        [SerializedDictionary("Level", "Threshold")] 
+        [SerializeField] private SerializedDictionary<int, int> _levelProgress;
 
         [Header("Enemies")]  [SerializedDictionary("Enemy Type", "Enemy Config")]
         [SerializeField] private SerializedDictionary<EnemyType, EnemyConfig> _enemiesDict;
@@ -30,6 +32,7 @@ namespace Application.Contexts.ProjectContext.Configs
         public float FireRate => _fireRate;
         public SerializedDictionary<EnemyType, EnemyConfig> EnemiesDict => _enemiesDict;
         public SerializedDictionary<ExpType, ExpConfig> ExpDict => _expDictionary;
+        public SerializedDictionary<int, int> LevelProgress => _levelProgress;
         public ProjectileConfig[] Projectiles => _projectiles;
     }
 }
