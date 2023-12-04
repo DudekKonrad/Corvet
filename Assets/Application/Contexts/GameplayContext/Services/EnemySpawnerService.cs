@@ -32,9 +32,9 @@ namespace Application.Contexts.GameplayContext.Services
             _spawnMarker.transform.position = _spawnPosition;
         }
 
-        private RatEnemyController OnCreateEnemy()
+        private WormEnemyController OnCreateEnemy()
         {
-            var enemy = _diContainer.InstantiatePrefabForComponent<RatEnemyController>(
+            var enemy = _diContainer.InstantiatePrefabForComponent<WormEnemyController>(
                 _gameConfig.EnemiesDict[EnemyType.Rat].EnemyPrefab, _enemiesContainer);
             _enemies.Add(enemy);
             return enemy;

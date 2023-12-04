@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: CorvetGameConfig
   m_EditorClassIdentifier: 
   _panelDuration: 0.4
-  _speed: 4
-  _fireRate: 2
+  _speed: 3
+  _fireRate: 1
   _expDictionary:
     _serializedList:
     - Key: 0
@@ -27,44 +27,44 @@ MonoBehaviour:
     - Key: 0
       Value: 0
     - Key: 1
-      Value: 25
-    - Key: 2
       Value: 50
+    - Key: 2
+      Value: 150
     - Key: 3
-      Value: 75
-    - Key: 4
-      Value: 100
-    - Key: 5
-      Value: 200
-    - Key: 6
-      Value: 250
-    - Key: 7
-      Value: 300
-    - Key: 8
-      Value: 350
-    - Key: 9
       Value: 400
-    - Key: 10
-      Value: 500
-    - Key: 11
-      Value: 600
-    - Key: 12
-      Value: 700
-    - Key: 13
-      Value: 800
-    - Key: 14
-      Value: 900
-    - Key: 15
+    - Key: 4
       Value: 1000
+    - Key: 5
+      Value: 1500
+    - Key: 6
+      Value: 2000
+    - Key: 7
+      Value: 3000
+    - Key: 8
+      Value: 3500
+    - Key: 9
+      Value: 4000
+    - Key: 10
+      Value: 5000
+    - Key: 11
+      Value: 6000
+    - Key: 12
+      Value: 7000
+    - Key: 13
+      Value: 8000
+    - Key: 14
+      Value: 9000
+    - Key: 15
+      Value: 10000
   _enemiesDict:
     _serializedList:
     - Key: 0
       Value:
         _enemyPrefab: {fileID: 2185067665961536094, guid: 4da02c7f911f3584b88bce47cc2fb492, type: 3}
         _maxHealthPoints: 30
-        _spawnCooldown: 2
-        _movementSpeed: 2
+        _spawnCooldown: 5
+        _movementSpeed: 1.5
   _projectiles:
   - _type: 0
-    _projectileSpeed: 4
-    _damage: 10
+    _projectileSpeed: 8
+    _damage: 5

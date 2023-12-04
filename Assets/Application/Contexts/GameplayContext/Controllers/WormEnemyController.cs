@@ -9,7 +9,7 @@ using Zenject;
 
 namespace Application.Contexts.GameplayContext.Controllers
 {
-    public class RatEnemyController : MonoBehaviour, IEnemy
+    public class WormEnemyController : MonoBehaviour, IEnemy
     {
         [Inject(Id = nameof(_playerController))] private readonly PlayerController _playerController;
         [Inject] private readonly ExpSpawnerService _expSpawnerService;

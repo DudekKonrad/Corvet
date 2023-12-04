@@ -45,7 +45,7 @@ namespace Application.Contexts.GameplayContext.Mediators
 
         private void OnCollisionEnter2D(Collision2D col)
         {
-            var enemy = col.gameObject.GetComponent<RatEnemyController>();
+            var enemy = col.gameObject.GetComponent<WormEnemyController>();
             if (enemy != null)
             {
                 enemy.TakeDamage(_projectileConfig.Damage);

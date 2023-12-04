@@ -16,11 +16,13 @@ namespace Application.Contexts.MainMenuContext
 
         public void Show()
         {
+            gameObject.SetActive(true);
             transform.DOLocalMoveY(0f, _gameConfig.PanelDuration).SetEase(_ease);
         }
 
         public void Hide(){
-            transform.DOLocalMoveY(1080f, _gameConfig.PanelDuration).SetEase(_ease);
+            transform.DOLocalMoveY(1080f, _gameConfig.PanelDuration).SetEase(_ease).OnComplete(
+                () => gameObject.SetActive(false));
         }
     }
 }
