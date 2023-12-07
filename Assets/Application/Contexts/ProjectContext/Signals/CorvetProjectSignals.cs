@@ -1,10 +1,11 @@
 ﻿using Application.Contexts.ProjectContext.Configs;
+using Application.GameCore;
 
 namespace Application.Contexts.ProjectContext.Signals
 {
     public class CorvetProjectSignals
     {
-        public class ExpChangedSignal
+        public class ExpChangedSignal : ISignal
         {
             private int _exp;
 
@@ -16,22 +17,22 @@ namespace Application.Contexts.ProjectContext.Signals
             public int Exp => _exp;
         }
         
-        public class LevelUpSignal
+        public class LevelUpSignal : ISignal
         {
             
         }
         
-        public class ShowLoadingScreenSignal
+        public class ShowLoadingScreenSignal : ISignal
         {
             
         }
         
-        public class HideLoadingScreenSignal
+        public class HideLoadingScreenSignal : ISignal
         {
             
         }
         
-        public class PlaySoundSignal
+        public class PlaySoundSignal : ISignal
         {
             private CorvetAudioClip.SoundType _soundType;
 
