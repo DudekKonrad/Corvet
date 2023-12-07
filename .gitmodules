@@ -1,3 +1,6 @@
 [submodule "Assets/Application/Utils"]
 	path = Assets/Application/Utils
 	url = git@github.com:DudekKonrad/Utils.git
+[submodule "Assets/Application/GameCore"]
+	path = Assets/Application/GameCore
+	url = git@github.com:DudekKonrad/Core.git
