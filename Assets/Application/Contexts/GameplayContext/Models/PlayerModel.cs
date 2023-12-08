@@ -4,16 +4,17 @@ namespace Application.Contexts.GameplayContext.Models
 {
     public class PlayerModel
     {
-        private Vector3 _playerPosition;
+        private Transform _transform;
         private int _maxHealth;
         private int _currentHealth;
 
-        public void SetPlayerPosition(Vector3 position)
+        public void SetPlayerTransform(Transform transform)
         {
-            _playerPosition = position;
+            _transform = transform;
         }
 
-        public Vector3 PlayerPosition => _playerPosition;
+        public Transform Transform => _transform;
+        public Vector3 Position => _transform.position;
         public int MaxHealth => _maxHealth;
         public int CurrentHealth => _currentHealth;
     }

@@ -65,6 +65,7 @@ MonoBehaviour:
         _spawnCooldown: 5
         _movementSpeed: 1.5
   _projectiles:
-  - _type: 0
+  - _prefab: {fileID: 4299973262845013567, guid: d5217afde4be9ed4f923fbd142f1cadd, type: 3}
+    _type: 0
     _projectileSpeed: 8
     _damage: 5

@@ -16,6 +16,7 @@ namespace Application.Contexts.GameplayContext
         {
             Container.BindInterfacesAndSelfTo<PlayerInputModel>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<ExpSpawnerService>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<ProjectilesService>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerModel>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<EnemyModel>().AsTransient().NonLazy();
             Container.BindInstance(_playerController).WithId(nameof(_playerController)).AsCached().NonLazy();

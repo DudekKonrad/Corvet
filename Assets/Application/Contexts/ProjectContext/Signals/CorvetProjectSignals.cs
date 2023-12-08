@@ -21,17 +21,7 @@ namespace Application.Contexts.ProjectContext.Signals
         {
             
         }
-        
-        public class ShowLoadingScreenSignal : ISignal
-        {
-            
-        }
-        
-        public class HideLoadingScreenSignal : ISignal
-        {
-            
-        }
-        
+
         public class PlaySoundSignal : ISignal
         {
             private CorvetAudioClip.SoundType _soundType;

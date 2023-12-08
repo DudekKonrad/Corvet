@@ -20,8 +20,8 @@ namespace Application.Contexts.ProjectContext.Fsm
         [Inject]
         private void Construct()
         {
-            Debug.Log($"Construct GameFsm");
             States.Add(GameState.MainMenu, new MainMenuState());
+            States.Add(GameState.Gameplay, new GameplayState());
             CurrentState = States[GameState.MainMenu];
             CurrentState.EnterState();
         }

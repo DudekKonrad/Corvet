@@ -48,8 +48,8 @@ namespace Application.Contexts.GameplayContext.Mediators
             if (IsCollected)
             {
                 var step = _gameConfig.ExpDict[_expType].FollowSpeed * Time.deltaTime; 
-                transform.position = Vector3.MoveTowards(transform.position, _playerModel.PlayerPosition, step);
-                if (transform.position == _playerModel.PlayerPosition)
+                transform.position = Vector3.MoveTowards(transform.position, _playerModel.Position, step);
+                if (transform.position == _playerModel.Position)
                 {
                     _pool.Release(this);
                     _expModel.AddExp(_gameConfig.ExpDict[_expType].Value);

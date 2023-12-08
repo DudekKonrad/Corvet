@@ -1,37 +1,41 @@
 ﻿using System.Linq;
 using Application.Contexts.GameplayContext.Controllers;
+using Application.Contexts.GameplayContext.Services;
 using Application.Contexts.ProjectContext.Configs;
 using DG.Tweening;
 using Resources.Configs;
 using UnityEngine;
-using UnityEngine.Pool;
 using Zenject;
 
 namespace Application.Contexts.GameplayContext.Mediators
 {
-    public class ProjectileView : MonoBehaviour
+    public class LeafProjectileView : MonoBehaviour, IProjectile
     {
         [Inject] private readonly CorvetGameConfig _gameConfig;
+        [Inject] private readonly ProjectilesService _projectilesService;
 
         [SerializeField] private ProjectileType _projectileType;
         [SerializeField] private ParticleSystem _particleSystem;
         [SerializeField] private float _destroyDelay;
         
         private Rigidbody2D _rigidbody;
-        private ObjectPool<ProjectileView> _pool;
         private Vector3 _direction;
         private ProjectileConfig _projectileConfig;
-        
-        public void Init(ObjectPool<ProjectileView> pool, Vector3 direction)
+        public Transform Transform => transform;
+        public GameObject GameObject => gameObject;
+
+
+
+        public void Init(Vector3 direction)
         {
-            _pool = pool;   
             _direction = direction;
             _direction.Normalize();
             transform.up = direction;
             gameObject.SetActive(true);
         }
 
-        private void Destroy() => _pool.Release(this);
+        private void Destroy() => _projectilesService.Pool.Release(this);
+        
         private void Start()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
