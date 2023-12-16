@@ -27,7 +27,7 @@ namespace Application.Contexts.GameplayContext.Services
         private void Start()
         {
             _enemiesPool = new ObjectPool<IEnemy>(OnCreateEnemy, OnGetEnemy, OnReleaseEnemy, defaultCapacity: 100);
-            _spawnCooldown = _gameConfig.EnemiesDict[EnemyType.Rat].SpawnCooldown;
+            _spawnCooldown = _gameConfig.EnemiesDict[EnemyType.Worm].SpawnCooldown;
             _spawnPosition = PositionUtils.RandomPositionInRange(-9f, 9f, -9f, 9f);
             _spawnMarker.transform.position = _spawnPosition;
         }
@@ -35,7 +35,7 @@ namespace Application.Contexts.GameplayContext.Services
         private WormEnemyController OnCreateEnemy()
         {
             var enemy = _diContainer.InstantiatePrefabForComponent<WormEnemyController>(
-                _gameConfig.EnemiesDict[EnemyType.Rat].EnemyPrefab, _enemiesContainer);
+                _gameConfig.EnemiesDict[EnemyType.Worm].EnemyPrefab, _enemiesContainer);
             _enemies.Add(enemy);
             return enemy;
         }

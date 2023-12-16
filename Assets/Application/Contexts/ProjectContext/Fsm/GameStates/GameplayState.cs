@@ -8,17 +8,14 @@ namespace Application.Contexts.ProjectContext.Fsm.GameStates
         public GameState StateType => GameState.Gameplay;
         public void EnterState()
         {
-            Debug.Log($"Enter {StateType}");
         }
 
         public void UpdateState()
         {
-            Debug.Log($"Update {StateType}");
         }
 
         public void ExitState()
         {
-            Debug.Log($"Exit {StateType}");
         }
 
         public GameState GetNextState()

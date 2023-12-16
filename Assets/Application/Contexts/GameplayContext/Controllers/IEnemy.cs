@@ -10,6 +10,7 @@ namespace Application.Contexts.GameplayContext.Controllers
         public EnemyType EnemyType { get; }
         public bool IsActiveInPool { get; set; }
         public void TakeDamage(int damageAmount);
+        public void DealDamage(int damageAmount);
         void Init(ObjectPool<IEnemy> enemiesPool);
     }
 }

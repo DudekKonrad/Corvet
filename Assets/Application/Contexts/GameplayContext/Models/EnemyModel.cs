@@ -5,7 +5,7 @@ namespace Application.Contexts.GameplayContext.Models
 {
     public enum EnemyType
     {
-        Rat = 0,
+        Worm = 0,
         Square = 1
     }
     
@@ -16,7 +16,7 @@ namespace Application.Contexts.GameplayContext.Models
         [Inject]
         private void Construct()
         {
-            _maxHealthPoints = _gameConfig.EnemiesDict[EnemyType.Rat].MaxHealthPoints;
+            _maxHealthPoints = _gameConfig.EnemiesDict[EnemyType.Worm].MaxHealthPoints;
         }
 
         private int _maxHealthPoints;

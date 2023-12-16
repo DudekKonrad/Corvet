@@ -14,23 +14,37 @@ namespace Application.Contexts.GameplayContext.Controllers
         [Inject(Id = nameof(_playerController))] private readonly PlayerController _playerController;
         [Inject] private readonly ExpSpawnerService _expSpawnerService;
         [Inject] private readonly CorvetGameConfig _gameConfig;
+        [Inject] private readonly PlayerModel _playerModel;
         [Inject] private readonly EnemyModel _enemyModel;
 
         [SerializeField] private FillBar _healthBar;
         [SerializeField] private float _duration;
         [SerializeField] private SpriteRenderer _blink;
-    
+        [SerializeField] private float _attackCooldown;
+        [SerializeField] private Vector3 _punchParams;
+        [SerializeField] private float _punchDuration;
+        [SerializeField] private int _punchVibrato;
+        [SerializeField] private int _punchElasticity;
+
         private Rigidbody2D _rigidbody;
         private ObjectPool<IEnemy> _pool;
+        private CooldownTimer<int> _damageTimer;
+        private Tweener _tweener;
 
         public GameObject GameObject => gameObject;
-        public EnemyType EnemyType => EnemyType.Rat;
+        public EnemyType EnemyType => EnemyType.Worm;
         public bool IsActiveInPool { get; set; }
         
         private void Start()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _enemyModel.CurrentHealthPoints = _enemyModel.MaxHealthPoints;
+            _damageTimer = new CooldownTimer<int>(_attackCooldown, DealDamage, 5);
+        }
+
+        public void DealDamage(int amount)
+        {
+            _playerModel.CurrentHealth -= amount;
         }
 
         public void Init(ObjectPool<IEnemy> enemiesPool)
@@ -50,7 +64,7 @@ namespace Application.Contexts.GameplayContext.Controllers
         {
             var direction = target - transform.position;
             direction.Normalize();
-            _rigidbody.velocity = direction * _gameConfig.EnemiesDict[EnemyType.Rat].MovementSpeed;
+            _rigidbody.velocity = direction * _gameConfig.EnemiesDict[EnemyType.Worm].MovementSpeed;
         }
 
         private void Blink()
@@ -59,6 +73,8 @@ namespace Application.Contexts.GameplayContext.Controllers
             _blink.color = new Color(1, 1, 1, 1);
             _blink.DOColor(new Color(1, 1, 1, 0), _duration).SetLoops(1, LoopType.Yoyo).
                 OnComplete(() => _blink.gameObject.SetActive(false));
+            _tweener.Kill();
+            _tweener = transform.DOPunchScale(_punchParams, _punchDuration, _punchVibrato, _punchElasticity);
         }
 
         public void TakeDamage(int damage)
@@ -80,6 +96,14 @@ namespace Application.Contexts.GameplayContext.Controllers
             var expPoint = _expSpawnerService.ExpPool.Get();
             expPoint.transform.position = transform.position;
             _pool.Release(this);
+        }
+
+        private void OnCollisionStay2D(Collision2D collision)
+        {
+            if (collision.gameObject.GetComponent<PlayerController>())
+            {
+                _damageTimer.UpdateTimer(Time.deltaTime);
+            }        
         }
     }
 }
