@@ -9,7 +9,7 @@ namespace Application.Contexts.GameplayContext.Models
     public class PlayerModel
     {
         [Inject] private readonly CorvetGameConfig _gameConfig;
-        
+
         private Transform _transform;
         private float _maxHealth;
         private float _currentHealth;

@@ -16,18 +16,21 @@ namespace Application.Contexts.GameplayContext.Services
         [Inject] private readonly DiContainer _diContainer;
         [Inject] private readonly CorvetGameConfig _gameConfig;
         [Inject] private readonly PlayerModel _playerModel;
-        [Inject(Id = nameof(_enemySpawnerService))] private EnemySpawnerService _enemySpawnerService;
 
-        
-        private Dictionary<ProjectileType, ObjectPool<IProjectile>> _poolDictionary = 
+        [Inject(Id = nameof(_enemySpawnerService))]
+        private EnemySpawnerService _enemySpawnerService;
+
+
+        private Dictionary<ProjectileType, ObjectPool<IProjectile>> _poolDictionary =
             new Dictionary<ProjectileType, ObjectPool<IProjectile>>();
-        private Dictionary<ProjectileType, CooldownTimer<ProjectileType>> _timersDictionary = 
+
+        private Dictionary<ProjectileType, CooldownTimer<ProjectileType>> _timersDictionary =
             new Dictionary<ProjectileType, CooldownTimer<ProjectileType>>();
-        
+
         public Dictionary<ProjectileType, ObjectPool<IProjectile>> PoolDictionary => _poolDictionary;
         public Dictionary<ProjectileType, CooldownTimer<ProjectileType>> TimersDictionary => _timersDictionary;
 
-        private GameObject GetProjectilePrefab(ProjectileType projectileType) => 
+        private GameObject GetProjectilePrefab(ProjectileType projectileType) =>
             _gameConfig.Projectiles[projectileType].Prefab;
 
         [Inject]
@@ -46,7 +49,7 @@ namespace Application.Contexts.GameplayContext.Services
 
         private void ShootInDirection(ProjectileType projectileType)
         {
-            var enemies = _enemySpawnerService.Enemies.Where(_ => _.IsActiveInPool).Select(_ => 
+            var enemies = _enemySpawnerService.Enemies.Where(_ => _.IsActiveInPool).Select(_ =>
                 _.GameObject.transform);
             var closestEnemy = _playerModel.Transform.GetClosestTransform(enemies);
             if (closestEnemy)
@@ -61,7 +64,7 @@ namespace Application.Contexts.GameplayContext.Services
         {
             return _poolDictionary[projectileType].Get();
         }
-        
+
         private void OnGetProjectile(IProjectile projectile)
         {
             projectile.Transform.position = _playerModel.Position;
@@ -74,7 +77,8 @@ namespace Application.Contexts.GameplayContext.Services
 
         private IProjectile OnCreateProjectile(ProjectileType projectileType)
         {
-            var projectile = _diContainer.InstantiatePrefabForComponent<IProjectile>(GetProjectilePrefab(projectileType), 
+            var projectile = _diContainer.InstantiatePrefabForComponent<IProjectile>(
+                GetProjectilePrefab(projectileType),
                 _playerModel.Transform);
             return projectile;
         }

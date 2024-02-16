@@ -7,9 +7,10 @@ namespace Application.Contexts.ProjectContext.Configs
     {
         Medium = 0
     }
+
     [Serializable]
     public class ExpConfig
-    { 
+    {
         [SerializeField] private GameObject _prefab;
         [SerializeField] private int _value;
         [SerializeField] private float _followSpeed;

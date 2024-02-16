@@ -15,7 +15,7 @@ namespace Application.Contexts.GameplayContext.Mediators
 
         [SerializeField] private ProjectileType _projectileType;
         [SerializeField] private ParticleSystem _particleSystem;
-        
+
         private Rigidbody2D _rigidbody;
         private Vector3 _direction;
         private ProjectileConfig _projectileConfig;
@@ -32,7 +32,7 @@ namespace Application.Contexts.GameplayContext.Mediators
         }
 
         private void Destroy() => _projectilesService.PoolDictionary[_projectileType].Release(this);
-        
+
         private void Start()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
@@ -52,6 +52,7 @@ namespace Application.Contexts.GameplayContext.Mediators
                 enemy.TakeDamage(_projectileConfig.Damage);
                 _particleSystem.Play();
             }
+
             DOVirtual.DelayedCall(_projectileConfig.DestroyDelay, Destroy);
         }
     }

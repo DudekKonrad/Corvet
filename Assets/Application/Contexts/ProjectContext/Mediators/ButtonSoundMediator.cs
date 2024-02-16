@@ -11,7 +11,7 @@ namespace Application.Contexts.ProjectContext.Mediators
     public class ButtonSoundMediator : MonoBehaviour, ISelectHandler
     {
         [Inject] private readonly SignalBus _signalBus;
-        
+
         private Button _button;
 
         private void Start()

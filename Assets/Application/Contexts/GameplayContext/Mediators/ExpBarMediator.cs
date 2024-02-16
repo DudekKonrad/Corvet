@@ -34,7 +34,8 @@ namespace Application.Contexts.GameplayContext.Mediators
 
         private void OnExpChangedSignal()
         {
-            var toNextLevel = _gameConfig.LevelProgress[_expModel.Level] - _gameConfig.LevelProgress[_expModel.Level-1];
+            var toNextLevel = _gameConfig.LevelProgress[_expModel.Level] -
+                              _gameConfig.LevelProgress[_expModel.Level - 1];
             var fillValue = (float) (_expModel.Exp - _gameConfig.LevelProgress[_expModel.Level - 1]) / toNextLevel;
             _fill.SetFill(fillValue, _duration, Color.green).OnComplete(() =>
             {

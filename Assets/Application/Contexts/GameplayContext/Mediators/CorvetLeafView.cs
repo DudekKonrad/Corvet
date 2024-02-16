@@ -12,7 +12,7 @@ namespace Application.Contexts.GameplayContext.Mediators
         [SerializeField] private GameObject _leftLeaf;
         [SerializeField] private GameObject _rightLeaf;
         [SerializeField] private float _duration;
-        
+
         private void Update()
         {
             var playerMovingLeft = _playerInput.Movement.x < 0;
@@ -33,7 +33,7 @@ namespace Application.Contexts.GameplayContext.Mediators
             if (playerStanding)
             {
                 _leftLeaf.transform.DORotate(Vector3.zero, _duration);
-                _rightLeaf.transform.DORotate(Vector3.zero, _duration); 
+                _rightLeaf.transform.DORotate(Vector3.zero, _duration);
             }
         }
     }

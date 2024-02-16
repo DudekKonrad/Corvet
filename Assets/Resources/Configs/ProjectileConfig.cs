@@ -8,7 +8,7 @@ namespace Resources.Configs
         Leaf = 0,
         Dust = 1
     }
-    
+
     [Serializable]
     public class ProjectileConfig
     {

@@ -8,7 +8,7 @@ namespace Application.Contexts.MainMenuContext
     public class UIPanel : MonoBehaviour
     {
         [Inject] private readonly CorvetGameConfig _gameConfig;
-    
+
         [SerializeField] private string _panelName;
         [SerializeField] private Ease _ease;
 
@@ -20,7 +20,8 @@ namespace Application.Contexts.MainMenuContext
             transform.DOLocalMoveY(0f, _gameConfig.PanelDuration).SetEase(_ease);
         }
 
-        public void Hide(){
+        public void Hide()
+        {
             transform.DOLocalMoveY(1080f, _gameConfig.PanelDuration).SetEase(_ease).OnComplete(
                 () => gameObject.SetActive(false));
         }

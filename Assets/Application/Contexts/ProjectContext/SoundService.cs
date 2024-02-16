@@ -14,7 +14,7 @@ namespace Application.Contexts.ProjectContext
         private Dictionary<CorvetAudioClip.SoundType, AudioClip> _dictionary;
 
         private AudioSource _audioSource;
-        
+
         [Inject]
         private void Construct()
         {

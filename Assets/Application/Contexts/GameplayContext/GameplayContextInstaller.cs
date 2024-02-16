@@ -12,6 +12,7 @@ namespace Application.Contexts.GameplayContext
         [SerializeField] private EnemySpawnerService _enemySpawnerService;
         [SerializeField] private Transform _enemiesContainer;
         [SerializeField] private Transform _expContainer;
+
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<PlayerInputModel>().AsSingle().NonLazy();

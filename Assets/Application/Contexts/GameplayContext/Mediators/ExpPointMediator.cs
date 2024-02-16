@@ -13,7 +13,7 @@ namespace Application.Contexts.GameplayContext.Mediators
         [Inject] private readonly CorvetGameConfig _gameConfig;
         [Inject] private readonly PlayerModel _playerModel;
         [Inject] private readonly ExpModel _expModel;
-        
+
         [SerializeField] private float _duration;
         [SerializeField] private ExpType _expType = ExpType.Medium;
         [SerializeField] private GameObject _expBody;
@@ -27,7 +27,7 @@ namespace Application.Contexts.GameplayContext.Mediators
         private void Start()
         {
             _expBody.transform.DOLocalMoveY(0.05f, _duration).SetLoops(-1, LoopType.Yoyo);
-            _shadow.transform.DOScale(new Vector3(0.3f, 0.15f, 0),_duration).SetLoops(-1, LoopType.Yoyo);  
+            _shadow.transform.DOScale(new Vector3(0.3f, 0.15f, 0), _duration).SetLoops(-1, LoopType.Yoyo);
         }
 
         public void Init(ObjectPool<ExpPointMediator> pool)
@@ -47,7 +47,7 @@ namespace Application.Contexts.GameplayContext.Mediators
         {
             if (IsCollected)
             {
-                var step = _gameConfig.ExpDict[_expType].FollowSpeed * Time.deltaTime; 
+                var step = _gameConfig.ExpDict[_expType].FollowSpeed * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, _playerModel.Position, step);
                 if (transform.position == _playerModel.Position)
                 {

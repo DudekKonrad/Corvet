@@ -5,7 +5,7 @@ namespace Application.Contexts.ProjectContext.Configs
 {
     [Serializable]
     public class EnemyConfig
-    { 
+    {
         [SerializeField] private GameObject _enemyPrefab;
         [SerializeField] private int _maxHealthPoints;
         [SerializeField] private float _spawnCooldown;

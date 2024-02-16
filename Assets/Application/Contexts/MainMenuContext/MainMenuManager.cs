@@ -18,7 +18,7 @@ namespace Application.Contexts.MainMenuContext
     {
         [Inject] private readonly SignalBus _signalBus;
         [Inject] private readonly GameFsm _gameFsm;
-        
+
         [SerializeField] private GameObject _loadingScreen;
         [SerializeField] private Image _loadingFill;
         [SerializeField] private float _duration = 0.4f;
@@ -43,16 +43,16 @@ namespace Application.Contexts.MainMenuContext
             _panels.First(_ => _.PanelName == panelName).Show();
             _activePanel = panelName;
         }
-        
+
         public void HidePanel(string panelName)
         {
             _panels.First(_ => _.PanelName == panelName).Hide();
         }
-        
+
         public void LoadScene(string sceneName)
         {
             _loadingScreen.SetActive(true);
-            _loadingScreen.transform.DOLocalMoveY(0f, _duration).OnComplete(() => 
+            _loadingScreen.transform.DOLocalMoveY(0f, _duration).OnComplete(() =>
                 StartCoroutine(LoadSceneAsync(sceneName)));
         }
 

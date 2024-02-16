@@ -11,7 +11,9 @@ namespace Application.Contexts.GameplayContext.Controllers
 {
     public class WormEnemyController : MonoBehaviour, IEnemy
     {
-        [Inject(Id = nameof(_playerController))] private readonly PlayerController _playerController;
+        [Inject(Id = nameof(_playerController))]
+        private readonly PlayerController _playerController;
+
         [Inject] private readonly ExpSpawnerService _expSpawnerService;
         [Inject] private readonly CorvetGameConfig _gameConfig;
         [Inject] private readonly PlayerModel _playerModel;
@@ -34,7 +36,7 @@ namespace Application.Contexts.GameplayContext.Controllers
         public GameObject GameObject => gameObject;
         public EnemyType EnemyType => EnemyType.Worm;
         public bool IsActiveInPool { get; set; }
-        
+
         private void Start()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
@@ -51,7 +53,7 @@ namespace Application.Contexts.GameplayContext.Controllers
         {
             _pool = enemiesPool;
             _enemyModel.CurrentHealthPoints = _gameConfig.EnemiesDict[EnemyType].MaxHealthPoints;
-            var fill = (float)_enemyModel.CurrentHealthPoints / _enemyModel.MaxHealthPoints;
+            var fill = (float) _enemyModel.CurrentHealthPoints / _enemyModel.MaxHealthPoints;
             _healthBar.Fill.fillAmount = fill;
         }
 
@@ -71,8 +73,8 @@ namespace Application.Contexts.GameplayContext.Controllers
         {
             _blink.gameObject.SetActive(true);
             _blink.color = new Color(1, 1, 1, 1);
-            _blink.DOColor(new Color(1, 1, 1, 0), _duration).SetLoops(1, LoopType.Yoyo).
-                OnComplete(() => _blink.gameObject.SetActive(false));
+            _blink.DOColor(new Color(1, 1, 1, 0), _duration).SetLoops(1, LoopType.Yoyo)
+                .OnComplete(() => _blink.gameObject.SetActive(false));
             _tweener.Kill();
             _tweener = transform.DOPunchScale(_punchParams, _punchDuration, _punchVibrato, _punchElasticity);
         }
@@ -80,7 +82,7 @@ namespace Application.Contexts.GameplayContext.Controllers
         public void TakeDamage(int damage)
         {
             _enemyModel.CurrentHealthPoints -= damage;
-            var fill = (float)_enemyModel.CurrentHealthPoints / _enemyModel.MaxHealthPoints;
+            var fill = (float) _enemyModel.CurrentHealthPoints / _enemyModel.MaxHealthPoints;
             Blink();
             _healthBar.SetFill(fill, _duration, Color.yellow).OnComplete(() =>
             {
@@ -103,7 +105,7 @@ namespace Application.Contexts.GameplayContext.Controllers
             if (collision.gameObject.GetComponent<PlayerController>())
             {
                 _damageTimer.UpdateTimer(Time.deltaTime);
-            }        
+            }
         }
     }
 }

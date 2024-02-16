@@ -8,7 +8,7 @@ namespace Application.Contexts.GameplayContext.Models
         Worm = 0,
         Square = 1
     }
-    
+
     public class EnemyModel
     {
         [Inject] private readonly CorvetGameConfig _gameConfig;

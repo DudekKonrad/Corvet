@@ -8,7 +8,7 @@ namespace Application.Contexts.GameplayContext.Models
     {
         [Inject] private readonly SignalBus _signalBus;
         [Inject] private readonly CorvetGameConfig _gameConfig;
-        
+
         private int _exp;
         private int _level = 1;
 

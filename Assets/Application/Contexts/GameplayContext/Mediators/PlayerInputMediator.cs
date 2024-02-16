@@ -16,14 +16,14 @@ namespace Application.Contexts.GameplayContext.Mediators
             var inputValue = value.Get<Vector2>();
             _playerInputModel.Point = inputValue;
         }
-        
+
         [UsedImplicitly]
         private void OnMovement(InputValue value)
         {
             var inputValue = value.Get<Vector2>();
             _playerInputModel.Movement = inputValue;
         }
-        
+
         [UsedImplicitly]
         private void OnSpaceClick(InputValue value)
         {

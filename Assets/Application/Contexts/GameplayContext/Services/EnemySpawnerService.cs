@@ -12,18 +12,20 @@ namespace Application.Contexts.GameplayContext.Services
 {
     public class EnemySpawnerService : MonoBehaviour
     {
-        [Inject(Id = nameof(_enemiesContainer))] private readonly Transform _enemiesContainer;
+        [Inject(Id = nameof(_enemiesContainer))]
+        private readonly Transform _enemiesContainer;
+
         [Inject] private readonly DiContainer _diContainer;
         [Inject] private readonly CorvetGameConfig _gameConfig;
-        
+
         [SerializeField] private GameObject _spawnMarker;
-        
+
         private ObjectPool<IEnemy> _enemiesPool;
         private List<IEnemy> _enemies = new List<IEnemy>();
         private float _spawnCooldown;
         private Vector3 _spawnPosition;
         public List<IEnemy> Enemies => _enemies;
-        
+
         private void Start()
         {
             _enemiesPool = new ObjectPool<IEnemy>(OnCreateEnemy, OnGetEnemy, OnReleaseEnemy, defaultCapacity: 100);

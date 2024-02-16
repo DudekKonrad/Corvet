@@ -16,10 +16,9 @@ namespace Application.Contexts.ProjectContext.Signals
 
             public int Exp => _exp;
         }
-        
+
         public class LevelUpSignal : ISignal
         {
-            
         }
 
         public class PlaySoundSignal : ISignal
@@ -33,6 +32,5 @@ namespace Application.Contexts.ProjectContext.Signals
 
             public CorvetAudioClip.SoundType Type => _soundType;
         }
-        
     }
 }
