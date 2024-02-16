@@ -73,7 +73,7 @@ MonoBehaviour:
         _type: 0
         _projectileSpeed: 10
         _damage: 5
-        _cooldown: 7
+        _cooldown: 2
         _destroyDelay: 0.1
     - Key: 1
       Value:
@@ -81,5 +81,5 @@ MonoBehaviour:
         _type: 1
         _projectileSpeed: 5
         _damage: 15
-        _cooldown: 7
+        _cooldown: 3.3
         _destroyDelay: 0.1
